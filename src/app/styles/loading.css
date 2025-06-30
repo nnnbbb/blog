@@ -1,0 +1,147 @@
+body {
+    background-image: url("https://picx.zhimg.com/80/v2-e54f847ba6bf5bff28bf0edefbada365_1440w.jpeg");
+    background-attachment: fixed;
+    -webkit-background-attachment: fixed;
+    background-repeat: no-repeat;
+    -webkit-background-repeat: no-repeat;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -o-background-size: cover;
+    background-position: center 0;
+    -webkit-background-position: center 0;
+}
+
+.loading-layer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgb(232,232,232);
+    background-repeat: no-repeat;
+    background-size: cover;
+    z-index: 9999;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.arc {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border-top: 3px solid #ffd65a;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    animation: rt 2s infinite linear;
+}
+
+.arc::before {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    border-top: 2px solid #4954E6;
+    border-left: 1px solid transparent;
+    border-right: 1px solid transparent;
+    animation: rt 4s infinite linear reverse;
+    content: "";
+}
+
+.arc::after {
+    position: absolute;
+    margin: auto;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    border-top: initial;
+    border-left: initial;
+    border-right: initial;
+    animation: cw 1s infinite;
+    content: "";
+    background: #FF94BC;
+}
+
+.loading-text {
+    position: absolute;
+    height: 40px;
+    margin: auto;
+    top: 200px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    text-transform: uppercase;
+    text-align: center;
+    letter-spacing: 0.1em;
+    font-size: 14px;
+    font-weight: lighter;
+}
+
+.loading-text span {
+    display: none;
+}
+
+.loading-text::after {
+    color: var(--mask-color);
+    animation: txt 5s infinite;
+    content: "";
+}
+
+.is-hidden {
+    visibility: hidden;
+    opacity: 0;
+    transition: 1s;
+}
+
+.is-visibile {
+    visibility: visible;
+    transition: 1s;
+}
+
+@keyframes rt {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes cw {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    75% {
+        width: 40px;
+        height: 40px;
+    }
+    100% {
+        width: 0;
+        height: 0;
+    }
+}
+
+@keyframes txt {
+    0% {
+        content: "LOADING.";
+    }
+    50% {
+        content: "LOADING..";
+    }
+    100% {
+        content: "LOADING...";
+    }
+}

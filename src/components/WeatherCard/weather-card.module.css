@@ -1,0 +1,48 @@
+.weather-display {
+  background    : linear-gradient(var(--main-color), #68b1fa);
+  width         : 95%;
+  padding-bottom: 20px;
+}
+
+.weather-color-green {
+  background-color: #81C995;
+}
+
+.weather-color-orange {
+  background-color: #DC7C06;
+}
+
+.weather-color-blue {
+  background-color: #4954E6;
+}
+
+.weather-color-red {
+  background-color: #EE675C;
+}
+
+.weather-city {
+  margin   : 10px 20px;
+  font-size: 17px;
+  color    : rgb(242, 241, 241);
+}
+
+.weather-data {
+  margin       : 15px 40px;
+  border-radius: .3em;
+  color        : rgb(242, 241, 241);
+  width        : -moz-fit-content;
+  width        : fit-content;
+  font-size    : 30px;
+  font-family  : var(--base-font);
+}
+
+.weather-little-data {
+  margin       : 0px 30px;
+  border-radius: .3em;
+  padding      : 5px;
+  width        : -moz-fit-content;
+  width        : fit-content;
+  font-size    : 15px;
+  color        : rgb(242, 241, 241);
+  font-family  : var(--base-font);
+}
