@@ -9,21 +9,24 @@
 @import 'tailwindcss/utilities';
 
 .iconfont {
-  font-family            : "iconfont" !important;
+  font-family               : "iconfont" !important;
   /* font-size              : 16px; */
-  font-style             : normal;
-  -webkit-font-smoothing : antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  font-style                : normal;
+  -webkit-font-smoothing    : antialiased;
+  -moz-osx-font-smoothing   : grayscale;
 }
+
 /* 定义loading-mask动画 */
 @keyframes loading-mask {
   0% {
     background-position: 100% 50%;
   }
+
   100% {
     background-position: 0 50%;
   }
 }
+
 @keyframes word-jump {
   0% {
     transform: translateY(0);
@@ -41,6 +44,7 @@
     transform: translateY(0px);
   }
 }
+
 :root {
   --loading-mask-color   : #f2f2f2;
   --loading-mask-to-color: #e0e0e0;
@@ -116,11 +120,13 @@
   --animation-3s           : .35s cubic-bezier(0.23, 1, 0.32, 1);
   --gray-box-shadow-0      : 0 0 8px 3px rgba(182, 181, 182, 0.9);
 }
+
 hr {
   border       : 0;
   border-bottom: solid 1px rgba(210, 215, 217, 0.75);
   margin       : 3em 0;
 }
+
 /* Main */
 #main {
   -moz-flex-grow    : 1;
@@ -346,6 +352,7 @@ a:hover strong {
     width: 200px !important;
   }
 }
+
 @media screen and (max-width: 1336px) {
   #live2d {
     display: none;
@@ -634,12 +641,14 @@ span.iconfont.icon-search.focus {
   align-items   : center;
   cursor        : pointer;
 }
+
 .navigation-content-item-container:hover {
   color             : var(--shadow-color);
   animation         : word-jump .35s ease-in-out;
   transition        : var(--animation-5s);
   -webkit-transition: var(--animation-5s);
 }
+
 .navigation-item {
   flex-grow      : 1;
   display        : flex;
@@ -1000,20 +1009,26 @@ a.image:hover img {
   border-radius: .3em;
   width        : -moz-fit-content;
   width        : fit-content;
+  border-bottom: solid 3px var(--main-color);
 }
 
 .markdown h3::before {
-  content         : "H3";
-  color           : white;
-  font-size       : 0.8em;
-  background-color: var(--main-color);
-  border-radius   : .3em;
-  margin-right    : 12px;
-  padding         : 4px 7px;
+  content      : "H3";
+  font-weight  : 1000;
+  font-size    : .9em;
+  color        : var(--main-color);
+  padding      : 4px 7px 0 0;
 }
 
 .markdown h4 {
   font-size: 1.1em;
+}
+
+.markdown h4::before {
+  content  : "#";
+  font-size: .9em;
+  color    : var(--main-color);
+  padding  : 4px 7px 0 0;
 }
 
 .markdown h5 {

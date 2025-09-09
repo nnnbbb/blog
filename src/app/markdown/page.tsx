@@ -132,7 +132,7 @@ export default function MarkdownEditorPage() {
         </div>
 
         {/* 预览 */}
-        <div className="w-1/2 p-6 overflow-auto" style={{
+        <div className="w-1/2 p-6 overflow-auto markdown" style={{
           scrollbarWidth: 'thin',
           scrollbarColor: 'rgba(128, 30, 255, 0.3) white',
         }}>

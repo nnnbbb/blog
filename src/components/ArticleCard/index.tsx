@@ -65,7 +65,7 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
         <div className="image" style={{ width: '200px', height: '120px' }}>
           <div className="loading-image-container">
             <div className="image-container display-image-wrapper">
-              <img src="https://picx.zhimg.com/80/v2-05e02375a07540d1950b249e00c67095_1440w.jpeg" className="paper-left-image" />
+              <img src={imageUrl} className="paper-left-image" />
             </div>
           </div>
         </div>

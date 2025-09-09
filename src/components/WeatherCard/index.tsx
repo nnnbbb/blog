@@ -2,21 +2,21 @@ import React from 'react';
 import styles from './weather-card.module.css';
 
 interface WeatherCardProps {
-  city: string;
-  temperature: string;
-  condition: string;
-  wind: string;
-  humidity: string;
-  airQuality: string;
+  city?: string;
+  temperature?: string;
+  condition?: string;
+  wind?: string;
+  humidity?: string;
+  airQuality?: string;
 }
 
 const WeatherCard: React.FC<WeatherCardProps> = ({
-  city,
-  temperature,
-  condition,
-  wind,
-  humidity,
-  airQuality
+  city = "??",
+  temperature = "??",
+  condition = "??",
+  wind = "?? ?",
+  humidity = "??",
+  airQuality = "??",
 }) => {
   return (
     <div className={`paper-card ${styles['weather-display']}`}>

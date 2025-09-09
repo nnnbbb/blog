@@ -32,6 +32,7 @@
   "dependencies": {
     "@t3-oss/env-nextjs": "0.13.4",
     "@tailwindcss/typography": "0.5.16",
+    "axios": "1.11.0",
     "katex": "0.16.22",
     "next": "15.3.2",
     "next-nprogress-bar": "2.4.7",

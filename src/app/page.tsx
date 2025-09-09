@@ -1,51 +1,91 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "vditor/dist/index.css";
 import ArticleCard from "@/components/ArticleCard";
 import WeatherCard from "@/components/WeatherCard";
 import styles from "./page.module.css";
+import { Http } from "../utils/http";
 
+interface Article {
+  id: number;
+  title: string;
+  description: string;
+  tags: string[];
+  img_url: string;
+  adjustTime: string;
+}
+interface Weather {
+  aqi: string;
+  cityNameCn: string;
+  cityNameEn: string;
+  humidity: string;
+  temperature: string;
+  time: string;
+  weather: string;
+  wind: string;
+}
 export default function Home() {
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [weather, setWeather] = useState<Weather>();
+
   useEffect(() => {
-    // Clear the effect
-    return () => {
-    };
+    Http.get("/home/get-news")
+      .then((res: any) => {
+        if (res) {
+          setArticles(res);
+        }
+      })
+      .catch((err) => {
+        console.error("获取文章失败", err);
+      });
+
+    getWeather()
   }, []);
+
+  const getWeather = () => {
+    // @ts-ignore
+    window.ipJson = function (data: any) {
+
+      console.log(data)
+      Http.get("thirdparty/get-city-weather-by-ip", {
+        city: data.city,
+        cityCode: data.cityCode,
+
+      }).then((res: any) => {
+        setWeather(res)
+      }).catch((err) => {
+        console.error("获取天气失败", err);
+      });
+    };
+
+    // 动态加载脚本
+    const script = document.createElement("script");
+    script.src = "//whois.pconline.com.cn/ipJson.jsp?callback=ipJson";
+    script.type = "text/javascript";
+    document.body.appendChild(script);
+
+    return () => {
+      document.body.removeChild(script);
+      // @ts-ignore
+      delete window.ipJson;
+    };
+  }
 
   return (
     <div className={styles['home-container']}>
       <div className={styles["home-banner-container"]}>
         <div className={styles["left"]}>
-          {/* 文章卡片1 */}
-          <ArticleCard
-            title=" 🚀 知乎圈子「OpenMCP 博物馆」策划书"
-            content="前言有幸收到知乎的邀请，成立一个有关MCP话题的「知乎圈子」，下面记录的就是圈子的一些规则和想法。"
-            date="May 28, 2025 17:41"
-            tags={["策划", "圈子", "mcp"]}
-          />
-
-          {/* 文章卡片2 */}
-          <ArticleCard
-            title="优雅地使用C++部署你的PyTorch推理模型（一）LibTorch的安装与基本使用"
-            content="三年前写的文章了，今天用crawl4ai转成markdown被到我的网站上来了-[来自专栏:深度学习工程化]..."
-            date="May 26, 2025 13:47"
-            tags={["老文章", "pytorch", "c++", "python"]}
-          />
-          <ArticleCard
-            title="优雅地使用C++部署你的PyTorch推理模型（一）LibTorch的安装与基本使用"
-            content="三年前写的文章了，今天用crawl4ai转成markdown被到我的网站上来了-[来自专栏:深度学习工程化]..."
-            date="May 26, 2025 13:47"
-            tags={["老文章", "pytorch", "c++", "python"]}
-          />
-          <ArticleCard
-            title="优雅地使用C++部署你的PyTorch推理模型（一）LibTorch的安装与基本使用"
-            content="三年前写的文章了，今天用crawl4ai转成markdown被到我的网站上来了-[来自专栏:深度学习工程化]..."
-            date="May 26, 2025 13:47"
-            tags={["老文章", "pytorch", "c++", "python"]}
-          />
-
-          {/* 这里可以添加更多文章卡片 */}
+          {articles.map((article) => (
+            <ArticleCard
+              key={article.id}
+              title={article.title}
+              content={article.description.replace(/## .*\n/g, "")} // 去掉 markdown 标题
+              date={article.adjustTime}
+              imageUrl={article.img_url}
+              tags={article.tags}
+            />
+          ))}
         </div>
 
         {/* 侧边栏 */}
@@ -54,12 +94,12 @@ export default function Home() {
             <div className="scroll" style={{ position: 'sticky', top: '10px', display: 'block' }}>
               {/* 天气卡片 */}
               <WeatherCard
-                city="深圳 shenzhen"
-                temperature="31.3°"
-                condition="多云"
-                wind="南风 1级"
-                humidity="67%"
-                airQuality="28 优"
+                city={`${weather?.cityNameCn ?? "??"} ${weather?.cityNameEn ?? "??"} `}
+                temperature={weather?.temperature}
+                condition={weather?.weather}
+                wind={weather?.wind}
+                humidity={weather?.humidity}
+                airQuality={weather?.aqi}
               />
 
               {/* 置顶博客 */}
