@@ -230,7 +230,7 @@ export const ParagraphComponent = ({ node, children, className, ...props }: any)
       </div>
     );
   }
-  return <div className="my-2" {...props}>{children}</div>;
+  return <div className="my-6" {...props}>{children}</div>;
 };
 
 // 引用块渲染组件

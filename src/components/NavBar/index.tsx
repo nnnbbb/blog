@@ -1,16 +1,15 @@
 "use client";
 
-import Link from 'next/link';
 import { useState, useEffect } from 'react';
 import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
-
+import { NavItem } from './nav-item';
+import { AnimatePresence, motion } from 'framer-motion';
 // 定义类型
 interface DropdownItem {
   title: string;
   href: string;
 }
-
 interface NavItemType {
   title: string;
   href: string;
@@ -45,86 +44,15 @@ const navItems: NavItemType[] = [
   { title: '联系', href: '/contact', icon: 'icon-contact' },
 ];
 
-// 导航项组件，支持下拉菜单
-interface NavItemProps {
-  item: NavItemType;
-  isActive: boolean;
-  onClick: (title: string) => void;
-}
-
-function NavItem({ item, isActive, onClick }: NavItemProps) {
-  const [showDropdown, setShowDropdown] = useState(false);
-  const router = useRouter();
-  const handleMouseEnter = () => {
-    if (item.dropdown) {
-      setShowDropdown(true);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    if (item.dropdown) {
-      setShowDropdown(false);
-    }
-  };
-
-  return (
-    <div
-      className={`navigation-item navigation-item-container ${isActive ? 'focus' : ''}`}
-      onMouseEnter={handleMouseEnter}
-      onMouseLeave={handleMouseLeave}
-    >
-      <div
-        onClick={() => {
-          onClick(item.title);
-          router.push(item.href);
-        }}
-      >
-        <div className="navigation-content-item-container">
-
-          <div className="navigaition-item-icon">
-            <span className={`iconfont ${item.icon}`}></span>
-          </div>
-          <span className="font-medium" style={{ fontSize: '1.0rem' }}>{item.title}</span>
-          {item.dropdown && (
-            <span className="iconfont icon-down"></span>
-          )}
-        </div>
-      </div>
-
-      {/* 下拉菜单 */}
-      {item.dropdown && (
-        <div style={{ display: showDropdown ? 'block' : 'none' }}>
-          <div>
-            <div className="navigation-item-arrow"></div>
-            <div className="navigation-arrow-mask"></div>
-          </div>
-          <div className="absolute top-full left-0 mt-1 w-40 bg-white/80 backdrop-blur-md rounded-md py-1 " style={{
-            zIndex: 12,
-            backgroundColor: 'rgba(255, 255, 255, 1)',
-            marginTop: '6px',
-          }}>
-            {item.dropdown.map((dropItem: DropdownItem) => (
-              <Link
-                key={dropItem.title}
-                href={dropItem.href}
-                className="block px-4 py-2 text-sm text-gray-700 hover:text-purple-600 hover:bg-purple-50"
-              >
-                {dropItem.title}
-              </Link>
-            ))}
-          </div>
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function NavBar() {
   const [activeItem, setActiveItem] = useState('首页');
   const [visible, setVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
   const router = useRouter();
+
+  const [open, setOpen] = useState(false);
+
   // 根据路径设置激活项
   useEffect(() => {
     // 找到匹配当前路径的导航项
@@ -145,37 +73,6 @@ export default function NavBar() {
     }
   }, [pathname]);
 
-  useEffect(() => {
-    const controlNavbar = () => {
-      // 如果组件还没有挂载或者window不存在，则直接返回
-      if (typeof window === 'undefined') {
-        return;
-      }
-
-      // 当前滚动位置
-      const currentScrollY = window.scrollY;
-
-      // 向下滚动且滚动超过20px时，隐藏导航栏
-      if (currentScrollY > lastScrollY && currentScrollY > 20) {
-        setVisible(false);
-      }
-      // 向上滚动时，显示导航栏
-      else if (currentScrollY < lastScrollY) {
-        setVisible(true);
-      }
-
-      // 更新最后的滚动位置
-      setLastScrollY(currentScrollY);
-    };
-
-    // 添加滚动事件监听器
-    window.addEventListener('scroll', controlNavbar);
-
-    // 组件卸载时，移除事件监听器
-    return () => {
-      window.removeEventListener('scroll', controlNavbar);
-    };
-  }, [lastScrollY]);
 
   return (
     <div>
@@ -185,7 +82,7 @@ export default function NavBar() {
         <div className="navigation-bar-body">
           <div className="left">
             {/* Logo区域 */}
-            <div className="website-icon">
+            <div className="website-icon" onClick={() => router.push("/")}>
               <img src="https://kirigaya.cn/favicon.png" alt="" className="w-[45px] h-[45px]" />
               <span>养心阁</span>
             </div>
@@ -235,13 +132,47 @@ export default function NavBar() {
               {/* 写点什么按钮 */}
               <div>
                 <div
-                  className="navigation-item-container items-center px-3 py-2 text-gray-700 hover:text-purple-600"
+                  onMouseEnter={() => setOpen(true)}
+                  onMouseLeave={() => setOpen(false)}
+                  className="navigation-item-container items-center px-3 py-2 text-gray-700 "
                 >
                   <div className="navigation-content-item-container">
 
                     <span className="iconfont icon-write !text-[1.2rem]"></span>
                     <span className="navigation-item-text">写点什么</span>
                   </div>
+                  <AnimatePresence>
+                    {open && (
+                      <motion.div
+                        initial={{ opacity: 0, scaleY: 0 }}
+                        animate={{ opacity: 1, scaleY: 1 }}
+                        exit={{ opacity: 0, scaleY: 0 }}
+                        transition={{ duration: 0.25, ease: "easeOut" }}
+                        style={{ originY: 0 }} // 以顶部为展开基准
+                      >
+                        <div
+                          className="navigation-item-tooltip "
+                          style={{ width: "130px", transform: "translate(-50px, 10px)" }}
+                        >
+                          <div className="write-icon-container p-2">
+                            <div
+                              className="page-item"
+                              onClick={() => router.push("/markdown")}
+                            >
+                              <div className="iconfont icon-edit-blog">&ensp;写博客</div>
+                              <span></span>
+                            </div>
+                          </div>
+                        </div>
+
+                        <div>
+                          <div className="navigation-item-arrow"></div>
+                          <div className="navigation-arrow-mask"></div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+
                 </div>
               </div>
 

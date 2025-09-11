@@ -1,6 +1,10 @@
+"use client";
+
 import React, { useState } from 'react';
+import { useRouter } from "next/navigation"; // App Router 下用 next/navigation
 
 interface ArticleCardProps {
+  id: number;
   title: string;
   content: string;
   date?: string;
@@ -9,16 +13,22 @@ interface ArticleCardProps {
 }
 
 const ArticleCard: React.FC<ArticleCardProps> = ({
+  id,
   title,
   content,
   date = "未知日期",
   tags = [],
-  imageUrl
+  imageUrl,
 }) => {
   const [isHovered, setIsHovered] = useState(false);
+  const router = useRouter();
+  const handleClick = () => {
+    router.push(`/blog/article?seq=${id}`);
+  };
 
   return (
     <div
+      onClick={handleClick}
       className="hover-effect-shadow-border p-5 mb-5 gap-5 hover:border-[rgba(128,30,255,1)]"
       style={{
         display: 'flex',

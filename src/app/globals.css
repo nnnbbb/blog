@@ -119,6 +119,8 @@
   --animation-5s           : .5s cubic-bezier(0.23, 1, 0.32, 1);
   --animation-3s           : .35s cubic-bezier(0.23, 1, 0.32, 1);
   --gray-box-shadow-0      : 0 0 8px 3px rgba(182, 181, 182, 0.9);
+  --option-container-height: 48px;
+  --option-container-width : 1281px;
 }
 
 hr {
@@ -1013,11 +1015,11 @@ a.image:hover img {
 }
 
 .markdown h3::before {
-  content      : "H3";
-  font-weight  : 1000;
-  font-size    : .9em;
-  color        : var(--main-color);
-  padding      : 4px 7px 0 0;
+  content    : "H3";
+  font-weight: 1000;
+  font-size  : .9em;
+  color      : var(--main-color);
+  padding    : 4px 7px 0 0;
 }
 
 .markdown h4 {
@@ -1033,4 +1035,257 @@ a.image:hover img {
 
 .markdown h5 {
   font-size: 0.9em;
+}
+
+button .iconfont {
+  font-size: 16px;
+}
+
+/* Button */
+input[type="submit"],
+input[type="reset"],
+input[type="button"],
+button,
+.button {
+  -moz-appearance   : none;
+  -webkit-appearance: none;
+  appearance        : none;
+  transition        : background-color 0.2s ease-in-out, color 0.2s ease-in-out;
+  background-color  : transparent;
+  border-radius     : 1.2em;
+  border            : 0;
+  box-shadow        : inset 0 0 0 2px var(--main-color);
+  color             : var(--main-color);
+  cursor            : pointer;
+  display           : inline-block;
+  font-family       : var(--base-font), serif;
+  font-size         : 0.9em;
+  font-weight       : 700;
+  height            : 3.5em;
+  letter-spacing    : 0.075em;
+  line-height       : 3.5em;
+  padding           : 0 2.25em;
+  text-align        : center;
+  text-decoration   : none;
+  text-transform    : uppercase;
+  white-space       : nowrap;
+}
+
+input[type="submit"]:hover,
+input[type="reset"]:hover,
+input[type="button"]:hover,
+button:hover,
+.button:hover {
+  background-color: var(--transplant-color);
+}
+
+input[type="submit"]:active,
+input[type="reset"]:active,
+input[type="button"]:active,
+button:active,
+.button:active {
+  background-color: rgba(245, 106, 106, 0.15);
+}
+
+/* input[type="submit"]iconfont:before,
+input[type="reset"]iconfont:before,
+input[type="button"]iconfont:before,
+buttoniconfont:before,
+.buttoniconfont:before {
+  margin-right: 0.5em;
+} */
+
+input[type="submit"].fit,
+input[type="reset"].fit,
+input[type="button"].fit,
+button.fit,
+.button.fit {
+  width: 100%;
+}
+
+input[type="submit"].small,
+input[type="reset"].small,
+input[type="button"].small,
+button.small,
+.button.small {
+  font-size: 0.6em;
+}
+
+input[type="submit"].large,
+input[type="reset"].large,
+input[type="button"].large,
+button.large,
+.button.large {
+  font-size  : 1em;
+  height     : 3.65em;
+  line-height: 3.65em;
+}
+
+input[type="submit"].primary,
+input[type="reset"].primary,
+input[type="button"].primary,
+button.primary,
+.button.primary {
+  background-color: var(--main-color);
+  box-shadow      : none;
+  color           : #ffffff !important;
+}
+
+input[type="submit"].primary:hover,
+input[type="reset"].primary:hover,
+input[type="button"].primary:hover,
+button.primary:hover,
+.button.primary:hover {
+  background-color: var(--main-color);
+  opacity         : 0.9;
+}
+
+input[type="submit"].primary:active,
+input[type="reset"].primary:active,
+input[type="button"].primary:active,
+button.primary:active,
+.button.primary:active {
+  background-color: var(--main-color);
+  opacity         : 0.6;
+}
+
+input[type="submit"].disabled,
+input[type="submit"]:disabled,
+input[type="reset"].disabled,
+input[type="reset"]:disabled,
+input[type="button"].disabled,
+input[type="button"]:disabled,
+button.disabled,
+button:disabled,
+.button.disabled,
+.button:disabled {
+  pointer-events: none;
+  opacity       : 0.25;
+}
+
+.kquote {
+  padding      : 10px 10px 10px 1rem;
+  font-size    : 0.9em;
+  margin       : 1em 0px;
+  color        : rgb(60, 60, 60);
+  border-left  : 6px solid var(--main-color);
+  background   : var(--slight-light-color);
+  border-radius: 0.5em;
+}
+
+
+.ktitle3 {
+  border-left     : 3.5px solid var(--main-color);
+  padding-left    : 10px;
+  padding-top     : 6px;
+  padding-bottom  : 6px;
+  background-color: rgba(255, 255, 255, 0.2);
+  transition      : all 0.3s linear;
+}
+
+.ktitle3:hover {
+  border-radius: 1em;
+  box-shadow   : 0 0 5px var(--shadow-color),
+    0 0 25px var(--shadow-color),
+    0 0 50px var(--shadow-color),
+    0 0 200px var(--shadow-color);
+  background-color: var(--main-color);
+  color           : white;
+  padding         : 10px;
+  transition      : all 0.3s linear;
+}
+
+
+.k-tag {
+  color         : white;
+  font-family   : var(--base-font), serif;
+  padding-left  : 12px;
+  padding-right : 12px;
+  padding-top   : 5px;
+  padding-bottom: 5px;
+  border-radius : .5em;
+
+  white-space  : nowrap;
+  text-overflow: ellipsis;
+  overflow     : hidden;
+}
+
+
+.kcard {
+  border-radius     : .9em;
+  padding-left      : 15px;
+  padding-right     : 15px;
+  padding-bottom    : 5px;
+  width             : auto;
+  height            : auto;
+  background-color  : rgba(255, 255, 255, 0.5);
+  font-family       : var(--base-font), serif;
+  transition        : all .3s linear;
+  -moz-transition   : all .3s linear;
+  -webkit-transition: all .3s linear;
+}
+
+.kcard:hover {
+  box-shadow        : 0 0 15px 8px rgba(158, 155, 155, 0.3);
+  transition        : all .3s linear;
+  -moz-transition   : all .3s linear;
+  -webkit-transition: all .3s linear;
+}
+
+.random-image-empty {
+  width           : 300px;
+  height          : 180px;
+  background-color: white;
+  border-radius   : .5em;
+  display         : flex;
+  align-items     : center;
+  justify-content : center;
+  font-size       : 350%;
+  color           : rgba(192, 192, 192, 0.8);
+}
+
+.my-input {
+  font-family       : var(--base-font), serif;
+  transition        : var(--animation-3s);
+  -webkit-transition: var(--animation-3s);
+  -moz-transition   : var(--animation-3s);
+}
+
+.write-icon-container {
+  width  : 120px;
+  padding: 10px;
+}
+.navigation-item-tooltip {
+  position        : absolute;
+  height          : -moz-fit-content;
+  height          : fit-content;
+  background-color: rgba(255, 255, 255, 1);
+  box-shadow      : var(--dark-shadow);
+  border-radius   : 5px;
+  z-index         : 12;
+  overflow        : hidden;
+}
+
+.page-item {
+  white-space  : nowrap;
+  font-family  : var(--base-font);
+  font-size    : 15px;
+  cursor       : pointer;
+  border-radius: .5em;
+  padding      : 7px 12px;
+  margin       : 2px;
+  transition   : var(--animation-3s);
+}
+
+.page-item.focus {
+  background-color: var(--transplant-main-color-1);
+  color           : white;
+  transition      : var(--animation-3s);
+}
+
+.page-item:hover {
+  background-color: var(--transplant-main-color-2);
+  color           : var(--shadow-color);
+  transition      : var(--animation-3s);
+  animation       : word-jump .35s ease-in-out;
 }
