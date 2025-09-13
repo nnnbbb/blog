@@ -124,16 +124,12 @@ export const customTheme = {
 export const CodeBlockComponent = (props: any) => {
   const { node, className, children, ...rest } = props;
 
-  // ReactMarkdown可能不提供inline属性，我们需要自己判断
-  // 如果有language-开头的className，通常表示是代码块
-  // 如果没有language-前缀或inline明确为true，则视为行内代码
   const isInlineCode = className === undefined || !className?.includes('language-');
 
   // 行内代码直接返回code标签
   if (isInlineCode) {
     return (
       <code
-        className="px-1.5 py-0.5 rounded bg-white/30 font-mono"
         {...rest}
       >
         {children}
@@ -149,29 +145,15 @@ export const CodeBlockComponent = (props: any) => {
 
   // 代码块使用高亮渲染
   return (
-    <div className="rounded-lg overflow-hidden shadow-md my-4">
-      {/* Mac风格窗口按钮 */}
-      <div className="flex items-center space-x-2 py-4 px-4 bg-white/40">
-        <div className="w-3 h-3 rounded-full bg-purple-500"></div>
-        <div className="w-3 h-3 rounded-full bg-gray-400"></div>
-        <div className="w-3 h-3 rounded-full bg-gray-400"></div>
-      </div>
+    <div >
       <Highlight
         theme={customTheme}
         code={code}
         language={language as string}
       >
         {({ className, style, tokens, getLineProps, getTokenProps }) => (
-          <pre className="bg-white/40 px-[22px] pb-[22px]" style={{
-            whiteSpace: 'pre-wrap',       /* 保留空格，但允许换行 */
-            wordWrap: 'break-word',       /* IE的旧语法 */
-            overflowWrap: 'break-word',   /* 现代语法 */
-          }}>
-            <code style={{
-              display: 'block',
-              overflowX: 'auto',
-              wordBreak: 'break-all',
-            }}>
+          <pre>
+            <code>
               {tokens.map((line, i) => (
                 <div key={i} {...getLineProps({ line })} style={{ wordBreak: 'break-word' }}>
                   {line.map((token, key) => (
@@ -219,34 +201,53 @@ export const ImageComponent = ({ node, ...props }: any) => {
 
 // 段落渲染组件
 export const ParagraphComponent = ({ node, children, className, ...props }: any) => {
-  if (className === 'img-caption') {
+  // 判断 children 是否是 ImageComponent
+  const hasImage =
+    React.Children.toArray(children).some(
+      (child) =>
+        React.isValidElement(child) &&
+        (child.type as any).name === "ImageComponent" // 匹配组件名
+    );
+
+  if (className === "img-caption") {
     return (
       <div className="w-full text-center mb-4">
-        <p className="inline-block text-gray-700 text-xl " style={{
-          borderBottom: '2px solid var(--shadow-color)',
-        }} {...props}>
+        <p
+          className="inline-block text-gray-700 text-xl"
+          style={{
+            borderBottom: "2px solid var(--shadow-color)",
+          }}
+          {...props}
+        >
           {children}
         </p>
       </div>
     );
   }
-  return <div className="my-6" {...props}>{children}</div>;
-};
 
+  // 如果包含 ImageComponent，就不能用 <p>
+  if (hasImage) {
+    return <div className="my-6" {...props}>{children}</div>;
+  }
+
+  return (
+    <div className="my-6" {...props}>
+      <p>{children}</p>
+    </div>
+  );
+};
 // 引用块渲染组件
 export const BlockquoteComponent = ({ node, children, ...props }: any) => {
   return (
-    <div className="relative my-6 rounded-xl bg-white/50 backdrop-blur-sm shadow-sm overflow-hidden">
-      <blockquote style={{
-        padding: '1rem 1.5rem',
-        fontStyle: 'italic',
-        color: '#4b5563',
-        borderLeft: '6px solid rgba(128, 30, 255, 1)',
-        borderRadius: '0.7em',
-      }} {...props}>
-        {children}
-      </blockquote>
-    </div>
+    <blockquote style={{
+      // padding: '1rem 1.5rem',
+      // fontStyle: 'italic',
+      // color: '#4b5563',
+      // borderLeft: '6px solid rgba(128, 30, 255, 1)',
+      // borderRadius: '0.7em',
+    }} {...props}>
+      {children}
+    </blockquote>
   );
 };
 
@@ -318,14 +319,14 @@ export const TableCellComponent = ({ children }: any) => {
     <td className="py-5 px-6 text-center text-gray-700 font-black text-lg
     border-0 border-transparent h-[30px]
     rounded-md transition-all duration-300 ease-linear"
-    onMouseEnter={(e) => {
-      e.currentTarget.style.backgroundColor = 'var(--shadow-color)';
-      e.currentTarget.style.boxShadow = '0 6px 16px 8px var(--shadow-color)';
-    }}
-    onMouseLeave={(e) => {
-      e.currentTarget.style.backgroundColor = '';
-      e.currentTarget.style.boxShadow = '';
-    }}
+      onMouseEnter={(e) => {
+        e.currentTarget.style.backgroundColor = 'var(--shadow-color)';
+        e.currentTarget.style.boxShadow = '0 6px 16px 8px var(--shadow-color)';
+      }}
+      onMouseLeave={(e) => {
+        e.currentTarget.style.backgroundColor = '';
+        e.currentTarget.style.boxShadow = '';
+      }}
     >
       {children}
     </td>
