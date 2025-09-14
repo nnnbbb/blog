@@ -1,0 +1,26 @@
+.pageNumber {
+  font-size          : 18px !important;
+  font-family        : var(--base-font);
+  cursor             : pointer;
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  user-select        : none;
+}
+
+.current-page-active {
+  color           : white !important;
+  background-color: var(--main-color);
+}
+
+.pageNumber:hover {
+  color           : white !important;
+  background-color: var(--shadow-color);
+  transition      : .3s linear ease-in-out;
+}
+
+.pageButton {
+  font-size          : 14px;
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  user-select        : none;
+}
