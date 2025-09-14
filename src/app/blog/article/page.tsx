@@ -11,12 +11,13 @@ import wordCount from "word-count";
 import { Http } from "@/utils/http";
 import { decodeGzipBase64 } from "@/utils/compression";
 import styles from "./article.module.css";
+import TagList from "./tag-list";
 
-interface Article {
+interface IArticle {
   title?: string;
   content?: string;
   img_url?: string;
-  tags?: string;
+  tags: string[];
   adjust_time?: string;
 }
 
@@ -24,9 +25,10 @@ export default function Article() {
   const [markdown, setMarkdown] = useState("");
   const [time, setTime] = useState("");
   const [stats, setStats] = useState({ words: 0, time: 0 });
-  const [article, setArticle] = useState<Article>();
+  const [article, setArticle] = useState<IArticle>();
   const [loaded, setLoaded] = useState(false);
   const [tocItems, setTocItems] = useState<TocItem[]>([]);
+  const [tags, setTags] = useState<string[]>([]);
 
   const searchParams = useSearchParams();
   const seq = searchParams?.get("seq");
@@ -35,12 +37,13 @@ export default function Article() {
     if (!seq) return;
 
     Http.get("/blog/fetch-blog-by-seq", { seq })
-      .then((res: Article) => {
+      .then((res: IArticle) => {
         setArticle(res);
         setTime(dayjs(res.adjust_time).format("MMM DD, YYYY"));
         const content = decodeGzipBase64(res.content!);
         setMarkdown(content);
-
+        console.log(tags)
+        setTags(res.tags)
         const wordStats = wordCount(content);
         const timeStats = readingTime(content);
         setStats({
@@ -103,6 +106,8 @@ export default function Article() {
               <section className={`${styles["dustblog-body"]} markdown`}>
                 <LMarkdown markdown={markdown} onTocGenerated={setTocItems} />
               </section>
+              <TagList tags={tags} />
+
             </div>
           </motion.section>
         )}
