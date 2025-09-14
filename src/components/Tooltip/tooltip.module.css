@@ -1,0 +1,40 @@
+:root {
+  --main-color                 : rgba(128, 30, 255, 1);
+  --shadow-color               : rgba(178, 80, 255, 0.99);
+  --transplant-color           : rgba(128, 30, 255, 0.1);
+  --light-color                : rgba(248, 242, 255, 0.7);
+  --tooltip-arrow-border-left  : 10px solid transparent;
+  --tooltip-arrow-border-right : 10px solid transparent;
+  --tooltip-arrow-border-top   : 10px solid var(--shadow-color);
+  --tooltip-arrow-border-bottom: 10px solid transparent;
+  --tooltip-arrow-left         : 201px;
+  --tooltip-arrow-top          : 33px;
+}
+
+.tooltip {
+  position        : absolute;
+  color           : white;
+  font-size       : 14px;
+  border-radius   : .6em;
+  background-color: var(--shadow-color);
+  height          : -moz-fit-content;
+  height          : fit-content;
+  width           : -moz-fit-content;
+  width           : fit-content;
+  padding         : 6px 10px;
+  z-index         : 99999;
+}
+
+.tooltip::before {
+  content     : "";
+  position    : absolute;
+  /* 居中 */
+  left        : 50%;
+  /* 放到 tooltip 下方 */
+  bottom      : -8px;
+  transform   : translateX(-50%);
+  border-left : 10px solid transparent;
+  border-right: 10px solid transparent;
+  /* 箭头颜色 */
+  border-top  : 10px solid var(--shadow-color);
+}
