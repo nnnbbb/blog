@@ -1,0 +1,38 @@
+#pivot {
+  min-height: 1700px;
+}
+
+.k-tabs {
+  position: relative;
+}
+
+.k-tabs-tags {
+  display      : flex;
+  border-bottom: 1.75px solid var(--main-color);
+  margin-bottom: 5px;
+  width        : 100%;
+  position     : relative;
+}
+
+.k-tabs-tag-item {
+  box-sizing         : border-box;
+  color              : rgb(16, 16, 16);
+  font-family        : var(--base-font);
+  padding            : 10px 12px 6px;
+  cursor             : pointer;
+  font-size          : 16px;
+  z-index            : 2;
+  white-space        : nowrap;
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  user-select        : none;
+}
+
+.hover-bar {
+  background-color: var(--main-color);
+  border-radius   : .9em .9em 0 0;
+  transition      : .35s ease-in-out;
+  position        : absolute;
+}
+
+

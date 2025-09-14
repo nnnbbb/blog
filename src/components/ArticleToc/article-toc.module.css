@@ -1,32 +1,23 @@
-.comment-animation-move,
-/* 对移动中的元素应用的过渡 */
-.comment-animation-enter-active,
-.comment-animation-leave-active {
+.comment-animation-move[data-v-1c32a759],
+
+.comment-animation-enter-active[data-v-1c32a759],
+.comment-animation-leave-active[data-v-1c32a759] {
   transition: all 0.5s ease;
 }
 
-/* pre>code {
-  color: black;
-} */
-
-.hr {
-  width : auto;
-  margin: 50px;
-}
-
-.comment-animation-enter-from,
-.comment-animation-leave-to {
+.comment-animation-enter-from[data-v-1c32a759],
+.comment-animation-leave-to[data-v-1c32a759] {
   opacity  : 0;
   transform: translateX(-100px);
 }
 
 /* 确保将离开的元素从布局流中删除
   以便能够正确地计算移动的动画。 */
-.comment-animation-leave-active {
+.comment-animation-leave-active[data-v-1c32a759] {
   position: absolute;
 }
 
-.comment-wrapper {
+.comment-wrapper[data-v-1c32a759] {
   transition        : 1.0s;
   -webkit-transition: 1.0s;
   display           : contents;
@@ -35,7 +26,7 @@
   overflow          : scroll;
 }
 
-.comment-item-wrapper {
+.comment-item-wrapper[data-v-1c32a759] {
   transition        : 1.0s;
   -webkit-transition: 1.0s;
   display           : flex;
@@ -43,71 +34,88 @@
   padding           : 10px;
 }
 
-.comment-portrait {
+.comment-portrait[data-v-1c32a759] {
   margin-top: 5px;
 }
 
-.comment-text-wrapper {
+.comment-text-wrapper[data-v-1c32a759] {
   margin-left: 20px;
 }
 
-.comment-desc {
+.comment-desc[data-v-1c32a759] {
   display      : flex;
   align-items  : baseline;
   font-family  : var(--base-font);
   margin-bottom: 10px;
 }
 
-.comment-content-wrapper {
-  display: flex;
+.comment-content-wrapper[data-v-1c32a759] {
+  display : flex;
+  position: relative;
 }
 
-.comment-content {
+.comment-content[data-v-1c32a759] {
   height          : calc(100% - 60px);
   padding         : 5px 15px;
-  color           : white;
-  background-color: #6DC45F;
+  color           : #6d6d6d;
+  background-color: rgba(255, 255, 255, 0.5);
   border-radius   : .5em;
-  max-width       : 500px;
+  box-shadow      : 0 0 10px rgba(0, 0, 0, 0.1);
   transition      : var(--animation-3s);
+  border-top      : 2px solid var(--main-color);
 }
 
-.comment-content.active {
+.comment-content.active[data-v-1c32a759] {
   transition      : var(--animation-3s);
   background-color: var(--main-color);
 }
 
-.comment-hover-window {
-  z-index: 100;
+.comment-hover-window[data-v-1c32a759] {
+  position: absolute;
+  right   : 0;
+  top     : -50px;
+  z-index : 100;
 }
 
-.expand-btn-wrapper {
+.expand-btn-wrapper[data-v-1c32a759] {
   margin-left     : 10px;
   display         : flex;
   height          : -moz-fit-content;
   height          : fit-content;
-  background-color: #DC7C06;
+  background-color: var(--main-color);
 }
 
-.expand-btn-wrapper {
+.expand-btn-wrapper[data-v-1c32a759] {
   border-radius: .5em;
+  overflow     : hidden;
 }
 
-.command-item-btn {
-  color    : white;
-  font-size: 13px;
-  margin   : 10px;
-  cursor   : pointer;
+.command-item-btn[data-v-1c32a759] {
+  display   : inline-flex;
+  color     : white;
+  font-size : 13px;
+  padding   : 10px;
+  cursor    : pointer;
+  transition: var(--animation-3s);
 }
 
-.publisher-name {
+.command-item-btn>span[data-v-1c32a759]:first-child {
+  margin-right: 5px;
+}
+
+.command-item-btn[data-v-1c32a759]:hover {
+  background-color: var(--shadow-color);
+  transition      : var(--animation-3s);
+}
+
+.publisher-name[data-v-1c32a759] {
   font-size: 20px;
 }
 
-.at-someone {
+.at-someone[data-v-1c32a759] {
   border-radius   : .5em;
   padding         : 5px 10px;
-  background-color: #DC7C06;
+  background-color: var(--main-color);
   color           : white;
   margin-top      : 3px;
   margin-left     : 10px;
@@ -116,7 +124,7 @@
   height          : fit-content;
 }
 
-.create-time {
+.create-time[data-v-1c32a759] {
   text-align   : left;
   font-family  : var(--base-font);
   font-size    : 13px;
@@ -125,17 +133,17 @@
   color        : var(--sidebar-color);
 }
 
-.comment-input-wrapper {
+.comment-input-wrapper[data-v-1c32a759] {
   display: flex;
   width  : 100%;
 }
 
-.comment-input-btn-wrapper {
+.comment-input-btn-wrapper[data-v-1c32a759] {
   margin-left: 10px;
   display    : flex;
 }
 
-.comment-input {
+.comment-input[data-v-1c32a759] {
   width           : 100% !important;
   font-size       : 16px;
   height          : 100px;
@@ -150,76 +158,72 @@
   transition      : 0.8s ease-in-out;
 }
 
-.comment-input::-moz-selection {
+.comment-input[data-v-1c32a759]::-moz-selection {
   background-color: rgb(170, 118, 207) !important;
 }
 
-.comment-input::selection {
+.comment-input[data-v-1c32a759]::selection {
   background-color: rgb(170, 118, 207) !important;
 }
 
-.comment-scrollbar {
+.comment-scrollbar[data-v-1c32a759] {
   overflow-y: scroll;
   max-height: 1000px;
   padding   : 5px;
 }
 
-.comment-scrollbar::-webkit-scrollbar {
+.comment-scrollbar[data-v-1c32a759]::-webkit-scrollbar {
   width: 8px;
 }
 
-.comment-scrollbar::-webkit-scrollbar-track {
+.comment-scrollbar[data-v-1c32a759]::-webkit-scrollbar-track {
   background-color: transparent;
 }
 
-.comment-scrollbar::-webkit-scrollbar-thumb {
+.comment-scrollbar[data-v-1c32a759]::-webkit-scrollbar-thumb {
   background   : var(--main-color);
   border-radius: .3em;
 }
 
-.comment-input-btn {
+.comment-input-btn[data-v-1c32a759] {
   margin     : 10px;
   font-size  : 12px;
   align-items: center;
 }
 
 @media screen and (max-width: 500px) {
-  .comment-input-wrapper {
+  .comment-input-wrapper[data-v-1c32a759] {
     display: contents;
     width  : 100% !important;
   }
 
-  .comment-input-btn-wrapper {
+  .comment-input-btn-wrapper[data-v-1c32a759] {
     margin-left  : inherit;
     display      : grid;
     text-align   : center;
     justify-items: center;
   }
 
-  .comment-input-btn {
+  .comment-input-btn[data-v-1c32a759] {
     width: 80%;
   }
 }
 
-.comment-content p {
+.comment-content p[data-v-1c32a759] {
   margin-bottom: 0 !important;
   color        : white;
 }
 
-.comment-content {
-  color: white !important;
-}
-
-.omment-input-btn-wrapper {
+.omment-input-btn-wrapper[data-v-1c32a759] {
   display: flex;
 }
 
-.comment-content img {
+.comment-content img[data-v-1c32a759] {
   max-width: 400px;
   overflow : scroll;
 }
 
-.select-wrapper {
+.select-wrapper[data-v-1c32a759] {
   width             : -moz-fit-content;
   width             : fit-content;
   height            : -moz-fit-content;
@@ -229,7 +233,7 @@
   -webkit-transition: 1.0s;
 }
 
-.light-k-select {
+.light-k-select[data-v-1c32a759] {
   transition        : 1.0s;
   -webkit-transition: 1.0s;
   box-shadow        : var(--main-color) 0px 0px 7px 9px;
@@ -237,49 +241,52 @@
   color             : var(--main-color) !important;
 }
 
-.character-count-wrapper {
+.character-count-wrapper[data-v-1c32a759] {
   margin: 17px;
 }
 
-.character-count {
+.character-count[data-v-1c32a759] {
   font-family: var(--base-font);
   color      : var(--sidebar-color);
   padding    : 5px 5px;
 }
 
-.cur-character {
+.cur-character[data-v-1c32a759] {
   color: var(--main-color);
 }
 
+/* pre>code[data-v-1c32a759] {
+  color: black;
+} */
 
-.comment-region {
+.comment-region[data-v-1c32a759] {
   display    : flex;
   align-items: center;
   color      : var(--foreground);
   font-size  : 20px;
 }
 
-.comment-region h2 {
+.comment-region h2[data-v-1c32a759] {
   font-size: 36px;
 }
 
-.comment-region .iconfont {
+.comment-region .iconfont[data-v-1c32a759] {
   margin-right: 8px;
   font-size   : 32px;
 }
 
-.comment-input-container {
+.comment-input-container[data-v-1c32a759] {
   position: relative;
 }
 
-.comment-input-container .bottom {
+.comment-input-container .bottom[data-v-1c32a759] {
   position: absolute;
   display : flex;
   bottom  : 20px;
   right   : 0;
 }
 
-.comment-input-container .at-user {
+.comment-input-container .at-user[data-v-1c32a759] {
   position     : absolute;
   display      : flex;
   bottom       : 20px;
@@ -293,16 +300,16 @@
   color        : white;
 }
 
-.comment-input-container .at-user .cancel {
+.comment-input-container .at-user .cancel[data-v-1c32a759] {
   color    : white;
   font-size: 20px;
 }
 
-.comment-input-container .iconfont {
+.comment-input-container .iconfont[data-v-1c32a759] {
   margin-right: 5px;
 }
 
-.comment-input-container button {
+.comment-input-container button[data-v-1c32a759] {
   display      : flex;
   align-items  : center;
   border-radius: 2em;
@@ -376,6 +383,52 @@
   justify-content: space-between;
 }
 
+.category-item-container {
+  margin       : 5px;
+  padding      : 5px;
+  font-size    : 15px;
+  padding-left : 10px;
+  width        : calc(var(--category-width) - 100px);
+  border-radius: .5em;
+  display      : block;
+  white-space  : nowrap;
+  text-overflow: ellipsis;
+  overflow     : hidden;
+  cursor       : pointer;
+  color        : rgb(13, 13, 13);
+  transition   : var(--animation-5s);
+}
+
+@keyframes loading-mask {
+  0% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0 50%;
+  }
+}
+
+.category-item-container:hover {
+  color     : var(--main-color);
+  transition: var(--animation-5s);
+  background: linear-gradient(90deg,
+      var(--transplant-main-color-2) 25%,
+      rgba(255, 255, 255, 1) 37%,
+      rgba(255, 255, 255, 0) 63%);
+  background-size  : 400% 100%;
+  animation-name   : loading-mask;
+  /* 或 loading-mask-hover */
+  animation        : loading-mask 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-animation: loading-mask 1.4s cubic-bezier(0.23, 1, 0.32, 1);
+}
+
+.category-item-container.active {
+  color           : var(--main-color);
+  background-color: var(--transplant-main-color-2);
+  transition      : var(--animation-5s);
+  border-left     : 5px solid var(--main-color);
+}
 
 .blog-toolbox-container {
   border-radius      : .6em;
@@ -738,7 +791,7 @@
 .dustblog-recommend .tags-container {
   display    : flex;
   align-items: center;
-  flex-wrap  : wrap;
+  flex-wrap  : nowrap;
 }
 
 .dustblog-recommend .tag {
@@ -761,6 +814,24 @@
   height       : 120px;
   border-radius: 8px;
   overflow     : hidden;
+}
+
+@media screen and (max-width: 741px) {
+  .dustblog-recommend .image-container {
+    display: none;
+  }
+
+  .dustblog-recommend .meta {
+    display: contents;
+  }
+
+  .dustblog-recommend .meta>span {
+    margin-top: 10px;
+  }
+
+  .dustblog-recommend .meta>div {
+    margin-top: 10px;
+  }
 }
 
 .dustblog-recommend .image-container img {

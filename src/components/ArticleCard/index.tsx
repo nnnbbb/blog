@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 import { useRouter } from "next/navigation"; // App Router 下用 next/navigation
+import styles from './article-card.module.css';
+import { formatDate } from '../../utils/time';
 
 interface ArticleCardProps {
   id: number;
@@ -58,12 +60,17 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
             fontSize: '15px',
             color: 'var(--sidebar-color)',
           }}>
-            {date && <span style={{ display: 'flex', alignItems: 'center', fontSize: '13px', marginRight: '10px' }}>{date}</span>}
+            {date &&
+              <span className={styles['date']}>
+                <span className="iconfont icon-history" style={{marginRight: '8px'}}></span>
+                <span>{formatDate(date)}</span>
+              </span>
+            }
             {tags.length > 0 && (
               <div className="tags-container" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
                 <span className='iconfont icon-tag' style={{ fontSize: '15px', marginRight: '5px' }}></span>
                 {tags.map((tag, index) => (
-                  <span key={index} className='bg-white/30 ' style={{ padding: '2px 8px', borderRadius: '3px' }}>{tag}</span>
+                  <span key={index} className={styles['tag']}>{tag}</span>
                 ))}
               </div>
             )}
