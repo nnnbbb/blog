@@ -6,6 +6,7 @@ import rehypeRaw from "rehype-raw";
 import remarkGfm from "remark-gfm";
 import remarkMath from "remark-math";
 import rehypeKatex from "rehype-katex";
+import remarkBreaks from "remark-breaks";
 
 interface LMarkdownProps {
   markdown: string;
@@ -55,7 +56,7 @@ export default function LMarkdown({ markdown, headingIdPrefix = "category-", onT
   return (
     <ReactMarkdown
       rehypePlugins={[rehypeRaw, rehypeKatex]}
-      remarkPlugins={[remarkGfm, remarkMath]}
+      remarkPlugins={[remarkGfm, remarkMath, remarkBreaks]}
       components={components}
     >
       {markdown}
