@@ -1,0 +1,13 @@
+.drawer-container {
+  position       : fixed;
+  top            : 0;
+  height         : 100%;
+  /* border      : 1.2px solid var(--main-color); */
+  backdrop-filter: blur(5px);
+  background     : rgba(255, 255, 255, 0.9);
+  box-shadow     : 0 0 8px 3px rgba(182, 181, 182, 0.9);
+  transition     : right 0.3s;
+  z-index        : 9999;
+  overflow-y     : auto;
+  border-radius  : .5em;
+}

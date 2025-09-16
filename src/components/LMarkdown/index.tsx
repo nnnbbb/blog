@@ -10,6 +10,7 @@ import remarkBreaks from "remark-breaks";
 import ArticleToc, { TocItem } from "../ArticleToc";
 import { getTocItem } from "./TitleComponents";
 import { getMarkdownComponents } from "./LMarkdownComponents";
+import UnderLineComment from "../UnderLineComment";
 
 interface LMarkdownProps {
   markdown: string;
@@ -39,6 +40,7 @@ export default function LMarkdown({ markdown, showToc = false }: LMarkdownProps)
       >
         {markdown}
       </ReactMarkdown>
+      <UnderLineComment />
 
     </div>
   );
