@@ -57,7 +57,7 @@ export default function Blog() {
           <div className={styles["k-tabs-tags"]}>
             <div className={styles["k-tabs-tag-item"]} style={{ color: 'white' }}>
               <span className="iconfont icon-hack pane-icon"></span>
-              <span>我的博客(328)</span>
+              <span>我的博客({total})</span>
             </div>
 
             {/* <div className="k-tabs-tag-item">
@@ -87,6 +87,7 @@ export default function Blog() {
                       {blogs.map((blog) => (
                         <BlogCard
                           key={blog.id}
+                          id={blog.id}
                           title={blog.title}
                           image={blog.imgUrl}
                           tags={blog.tags}

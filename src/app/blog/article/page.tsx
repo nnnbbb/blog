@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 import { motion, AnimatePresence } from "framer-motion";
-import LMarkdown, { TocItem } from "@/components/LMarkdown";
+import LMarkdown from "@/components/LMarkdown";
 import ArticleToc from "@/components/ArticleToc";
 import readingTime from "reading-time";
 import wordCount from "word-count";
@@ -16,9 +16,9 @@ import TagList from "./tag-list";
 interface IArticle {
   title?: string;
   content?: string;
-  img_url?: string;
+  imgUrl?: string;
   tags: string[];
-  adjust_time?: string;
+  adjustTime?: string;
 }
 
 export default function Article() {
@@ -27,7 +27,7 @@ export default function Article() {
   const [stats, setStats] = useState({ words: 0, time: 0 });
   const [article, setArticle] = useState<IArticle>();
   const [loaded, setLoaded] = useState(false);
-  const [tocItems, setTocItems] = useState<TocItem[]>([]);
+
   const [tags, setTags] = useState<string[]>([]);
 
   const searchParams = useSearchParams();
@@ -39,10 +39,10 @@ export default function Article() {
     Http.get("/blog/fetch-blog-by-seq", { seq })
       .then((res: IArticle) => {
         setArticle(res);
-        setTime(dayjs(res.adjust_time).format("MMM DD, YYYY"));
+        setTime(dayjs(res.adjustTime).format("MMM DD, YYYY"));
         const content = decodeGzipBase64(res.content!);
         setMarkdown(content);
-        console.log(tags)
+
         setTags(res.tags)
         const wordStats = wordCount(content);
         const timeStats = readingTime(content);
@@ -60,7 +60,6 @@ export default function Article() {
 
   return (
     <div style={{ minHeight: "100vh" }}>
-      <ArticleToc items={tocItems} />
 
       <AnimatePresence>
         {loaded && (
@@ -91,11 +90,11 @@ export default function Article() {
                 </div>
               </div>
 
-              {article?.img_url && (
+              {article?.imgUrl && (
                 <div className={styles["dustblog-cover"]}>
                   <div className="loading-image-container">
                     <div className={styles["image-container"]}>
-                      <img className="banner-image" src={article.img_url} />
+                      <img className="banner-image" src={article.imgUrl} />
                     </div>
                   </div>
                 </div>
@@ -104,7 +103,7 @@ export default function Article() {
               <hr className={styles["hr"]} />
 
               <section className={`${styles["dustblog-body"]} markdown`}>
-                <LMarkdown markdown={markdown} onTocGenerated={setTocItems} />
+                <LMarkdown markdown={markdown} showToc={true} />
               </section>
               <TagList tags={tags} />
 

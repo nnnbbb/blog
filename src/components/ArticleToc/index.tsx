@@ -5,7 +5,7 @@ import { createPortal } from "react-dom";
 import clsx from "clsx";
 import styles from "./article-toc.module.css";
 
-interface TocItem {
+export interface TocItem {
   id: string;
   title: string;
   level: number; // 控制缩进
@@ -33,7 +33,7 @@ export default function ArticleToc({ items }: ArticleTocProps) {
   };
 
   const toc = (
-    <div
+    items.length > 0 && <div
       className={clsx(styles["float-article-tool-wrapper"], styles["no-selection"])}
       style={{
         position: "fixed",
@@ -46,7 +46,7 @@ export default function ArticleToc({ items }: ArticleTocProps) {
       <div className={styles["category"]}>
         <div className={styles["scrollbar"]}>
           <div className={styles["category-title-container"]}>
-            <a href="#category-0" className={styles["category-title"]}>
+            <a href="#category-0" className={styles["category-title"]} onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
               {/* 保持原有 class */}
               <span className="iconfont icon-category"></span> &ensp;文章目录
             </a>

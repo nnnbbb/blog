@@ -2,20 +2,28 @@
 
 import React, { useRef, useState } from "react";
 import Tooltip from "@/components/Tooltip/Tooltip";
+import { useRouter } from "next/navigation";
 
 interface BlogCardProps {
+  id: number;
   title: string;
   image: string;
   tags: string[];
   modifiedAt: string;
 }
 
-const BlogCard: React.FC<BlogCardProps> = ({ title, image, tags, modifiedAt }) => {
+const BlogCard: React.FC<BlogCardProps> = ({ id, title, image, tags, modifiedAt }) => {
   const titleRef = useRef<HTMLDivElement>(null);
   const [showTooltip, setShowTooltip] = useState(false);
+  const router = useRouter();
+
+  const handleClick = () => {
+    router.push(`/blog/article?seq=${id}`);
+  };
 
   return (
-    <div className="col-4 col-12-medium" style={{ position: "relative" }}>
+    <div onClick={handleClick}
+      className="col-4 col-12-medium" style={{ position: "relative" }}>
       <div className="paper-card">
         <div className="paper-card-inner">
           <div className="loading-image-container">
