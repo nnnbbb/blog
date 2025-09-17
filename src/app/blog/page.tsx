@@ -5,6 +5,7 @@ import BlogCard from './blog-card';
 import styles from './blog.module.css';
 import Pagination from '../../components/Pagination';
 import { Http } from '@/utils/http';
+import { AnimatePresence, motion } from 'framer-motion';
 
 
 interface BlogItem {
@@ -21,13 +22,17 @@ export default function Blog() {
   const [total, setTotal] = useState(0);
   const [page, setPage] = useState(1);
   const pageSize = 9;
-  useEffect(() => {
+  const top = () => {
     // 默认滚动到 window 顶部
     const sc = document.scrollingElement || document.documentElement || document.body;
     sc.scrollTo({ top: 0, behavior: "smooth" });
-  }, [page]);
+  }
   useEffect(() => {
-    Http.get<{ list: BlogItem[], total: number }>(`/blog/query-blog?page=${page}&pageSize=${pageSize}`)
+    Http.get<{ list: BlogItem[], total: number }>(
+      `/blog/query-blog`, {
+      page: page,
+      pageSize: pageSize,
+    })
       .then((res) => {
         setBlogs(res.list);
         setTotal(res.total);
@@ -83,18 +88,27 @@ export default function Blog() {
               <div style={{ minHeight: '800px' }}>
                 <div style={{}}>
                   <section style={{ paddingTop: '10px' }}>
-                    <div className="row">
-                      {blogs.map((blog) => (
-                        <BlogCard
-                          key={blog.id}
-                          id={blog.id}
-                          title={blog.title}
-                          image={blog.imgUrl}
-                          tags={blog.tags}
-                          modifiedAt={blog.adjustTime}
-                        />
-                      ))}
-                    </div>
+                    <AnimatePresence>
+                      <motion.div
+                        className="row"
+                        initial={{ opacity: 0, x: -100 }}   // 初始：左边 50px + 透明
+                        animate={{ opacity: 1, x: 0 }}     // 动画到正常位置
+                        exit={{ opacity: 0, x: 50 }}       // 退出时向右
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                      >
+
+                        {blogs.map((blog) => (
+                          <BlogCard
+                            key={blog.id}
+                            id={blog.id}
+                            title={blog.title}
+                            image={blog.imgUrl}
+                            tags={blog.tags}
+                            modifiedAt={blog.adjustTime}
+                          />
+                        ))}
+                      </motion.div>
+                    </AnimatePresence>
                   </section>
                 </div>
               </div>
@@ -103,7 +117,10 @@ export default function Blog() {
                 total={total}
                 page={page}
                 pageSize={pageSize}
-                onChange={(p) => setPage(p)}
+                onChange={(p) => {
+                  top()
+                  setPage(p)
+                }}
               />
             </div>
 

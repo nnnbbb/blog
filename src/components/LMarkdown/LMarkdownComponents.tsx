@@ -357,6 +357,17 @@ export const ListItemComponent = ({ children }: any) => {
     </li>
   );
 };
+export const LinkComponent = ({ href, children }: any) => {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      rel="noopener noreferrer"
+    >
+      {children}
+    </a>
+  );
+};
 
 // 获取自定义组件映射
 export const getMarkdownComponents = () => {
@@ -374,6 +385,7 @@ export const getMarkdownComponents = () => {
     ul: UnorderedListComponent,
     ol: OrderedListComponent,
     li: ListItemComponent,
+    a: LinkComponent,
   };
 };
 
