@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./drawer.module.css";
 
@@ -18,6 +18,10 @@ export default function Drawer({
   children,
 }: DrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     if (!visible) return;
@@ -33,6 +37,7 @@ export default function Drawer({
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [visible, onClose]);
+  if (!mounted) return null; // 🚀 避免 SSR 阶段执行 document
 
 
   return createPortal(
