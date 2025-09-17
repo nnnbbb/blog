@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { useRouter } from 'next/navigation';
 import { NavItem } from './nav-item';
 import { AnimatePresence, motion } from 'framer-motion';
+import SearchBox from './SearchBox';
 // 定义类型
 interface DropdownItem {
   title: string;
@@ -101,30 +102,8 @@ export default function NavBar() {
           </div>
           <div className="right">
             {/* 右侧功能区 */}
-            <div className="search-box">
-              {/* 搜索框 */}
-              <div className="search-box-container">
-
-                <div className='search-type-container'>
-
-                  <div className='current-search-type'>
-                    <span className="iconfont icon-blog !text-[1.2rem]"></span>
-                  </div>
-
-                  <div className='current-search-type-arrow'>
-                    <span className="iconfont icon-arrow-down"></span>
-                  </div>
-                </div>
-                <span className="search-spliter"></span>
-                <div className='search-input-container'>
-                  <input type="text" className="search-box" />
-                  <div className='search-box-icon'>
-                    <span className="iconfont icon-search !text-[1.2rem]"></span>
-                  </div>
-                </div>
-              </div>
-
-            </div>
+            {/* 搜索框 */}
+            <SearchBox />
 
             {/* 右侧按钮组 */}
 
