@@ -36,7 +36,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
         <div id="app">
           <NavBar />
-          <Suspense fallback={<div className="h-1 bg-purple-600 w-full absolute top-0 animate-pulse"></div>}>
+          <Suspense fallback={<div className="h-1 w-full absolute top-0 animate-pulse"></div>}>
             <div id="main">
               <div className="inner">
                 {children}

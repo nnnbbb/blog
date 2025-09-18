@@ -1,0 +1,114 @@
+.date {
+  display    : flex;
+  align-items: center;
+  font-size  : 13px;
+}
+
+
+.tag {
+  margin       : 2px;
+  padding      : 2px 3px;
+  font-size    : 13px;
+  border       : 1px solid;
+  white-space  : nowrap;
+  max-width    : 50px;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+  border-radius: .5em;
+  cursor       : pointer;
+  transition   : var(--animation-3s);
+}
+
+.tag:hover {
+  background-color: var(--main-color);
+  color           : white;
+  transition      : var(--animation-3s);
+}
+
+.article-card-container {
+  display        : flex;
+  justify-content: space-evenly;
+  border-bottom  : var(--border);
+  margin-top     : 32px;
+  padding-top    : 10px;
+  padding-bottom : 25px;
+  overflow       : hidden;
+  padding        : 12px 10px;
+}
+
+.article-card-container>div:last-child {
+  border-bottom: unset;
+}
+
+.article-card-container .blog {
+  width              : 400px;
+  padding            : 0px 20px;
+  -webkit-user-select: none;
+  -moz-user-select   : none;
+  user-select        : none;
+}
+
+.article-card-container h2 {
+  font-size    : 25px;
+  margin-bottom: 5px;
+}
+
+.article-card-container h2 .iconfont::before {
+  font-size   : 24px;
+  margin-right: 10px;
+  color       : var(--main-color);
+}
+
+.article-card-container .meta {
+  display        : flex;
+  align-items    : center;
+  justify-content: space-between;
+  margin-top     : 30px;
+  font-size      : 15px;
+  color          : var(--sidebar-color);
+}
+
+.article-card-container .image {
+  width : 200px;
+  height: 120px;
+}
+
+.article-card-container .description {
+  text-align        : left;
+  -webkit-line-clamp: 2;
+  -moz-line-clamp   : 2;
+  line-clamp        : 2;
+  text-overflow     : ellipsis;
+  -webkit-box-orient: vertical;
+  font-size         : 16px;
+  display           : -webkit-box;
+  overflow          : hidden;
+}
+
+@media screen and (max-width: 740px) {
+  .large-width {
+    display: none !important;
+  }
+
+  .small-width {
+    width          : 100%;
+    display        : flex;
+    justify-content: center;
+  }
+
+  .small-width .image {
+    margin-top: 10px;
+    width     : 98% !important;
+    height    : 150px !important;
+  }
+}
+
+@media screen and (min-width: 741px) {
+  .small-width {
+    display: none !important;
+  }
+
+  .large-width {
+    display: block !important;
+  }
+}

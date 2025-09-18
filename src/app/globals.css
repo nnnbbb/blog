@@ -92,7 +92,7 @@
   --sidebar-color          : #6B6B6B;
   --border-color           : rgba(86, 86, 86, 0.2);
   --border                 : 1px solid var(--border-color);
-  --background             : rgba(255, 255, 255, 0.75);
+  --background             : rgba(255, 255, 255, 0.7);
   --footer-background      : rgba(255, 255, 255, 0.65);
   --scrollbar-color        : rgba(128, 30, 255, 1);
   --mainTransplate         : rgba(255, 255, 255, 0.9);
@@ -159,7 +159,35 @@ hr {
 #main>.inner>section:first-of-type {
   border-top: 0 !important;
 }
+@media screen and (max-width: 1680px) {
+  #main>.inner {
+    padding: 120px 6em 0.1em 6em;
+  }
 
+  #main>.inner>section {
+    padding: 5em 0 3em 0;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  #main>.inner {
+    padding: 120px 6em 0.1em 6em;
+  }
+
+  #main>.inner>section {
+    padding: 4em 0 2em 0;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  #main>.inner {
+    padding: 100px 1.5em 0.1em 1.5em;
+  }
+
+  #main>.inner>section {
+    padding: 3em 0 1em 0;
+  }
+}
 
 html,
 body,
@@ -2908,11 +2936,13 @@ img {
     padding-top: 3em;
   }
 }
+
 .block-text {
   text-align : center;
   padding    : 10px;
   font-family: var(--base-font), serif;
 }
+
 .blog-title {
   color        : black;
   font-size    : 18px;
@@ -2928,6 +2958,7 @@ img {
   font-size    : 20px;
   font-family  : var(--base-font), serif;
 }
+
 .card-sub-title::before {
   content         : "K";
   font-family     : var(--base-font), serif;

@@ -1,14 +1,14 @@
 "use client";
 
-import React, { useState } from 'react';
-import { useRouter } from "next/navigation"; // App Router 下用 next/navigation
-import styles from './article-card.module.css';
-import { formatDate } from '../../utils/time';
+import { useRouter } from "next/navigation";
+import React from "react";
+import { formatDate, validDate } from "@/utils/time";
+import "./article-card.css"
 
 interface ArticleCardProps {
   id: number;
   title: string;
-  content: string;
+  description: string;
   date?: string;
   tags?: string[];
   imageUrl?: string;
@@ -17,12 +17,11 @@ interface ArticleCardProps {
 const ArticleCard: React.FC<ArticleCardProps> = ({
   id,
   title,
-  content,
+  description,
   date = "未知日期",
   tags = [],
   imageUrl,
 }) => {
-  const [isHovered, setIsHovered] = useState(false);
   const router = useRouter();
   const handleClick = () => {
     router.push(`/blog/article?seq=${id}`);
@@ -31,58 +30,56 @@ const ArticleCard: React.FC<ArticleCardProps> = ({
   return (
     <div
       onClick={handleClick}
-      className="hover-effect-shadow-border p-5 mb-5 gap-5 hover:border-[rgba(128,30,255,1)]"
-      style={{
-        display: 'flex',
-        justifyContent: 'space-evenly',
-        borderBottom: isHovered ? '1px solid rgba(128,30,255,1)' : '1px solid rgba(86, 86, 86, 0.2)',
-        marginTop: '32px',
-        paddingTop: '10px',
-        paddingBottom: '25px',
-      }}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
-    >
-      <div style={{ flex: '1', verticalAlign: 'baseline' }}>
-        <h2 style={{ fontSize: '25px', marginBottom: '5px' }}>
-          <span className="iconfont icon-blog" style={{ fontSize: '24px', marginRight: '10px', color: 'rgba(128, 30, 255, 1)' }}></span>
-          <span style={{ margin: '0', fontSize: '25px', fontWeight: 'bold' }}>{title}</span>
-        </h2>
-        <p style={{ margin: '10px 0', fontSize: '0.9rem' }}>
-          {content}
-        </p>
-        {(date || tags.length > 0) && (
-          <div style={{
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'space-between',
-            marginTop: '30px',
-            fontSize: '15px',
-            color: 'var(--sidebar-color)',
-          }}>
-            {date &&
-              <span className={styles['date']}>
-                <span className="iconfont icon-history" style={{marginRight: '8px'}}></span>
-                <span>{formatDate(date)}</span>
-              </span>
-            }
-            {tags.length > 0 && (
-              <div className="tags-container" style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
-                <span className='iconfont icon-tag' style={{ fontSize: '15px', marginRight: '5px' }}></span>
-                {tags.map((tag, index) => (
-                  <span key={index} className={styles['tag']}>{tag}</span>
-                ))}
+      className="content article-card-container hover-effect-shadow-border">
+      <div className="blog">
+        <div>
+          <h2>
+            <span className="iconfont icon-blog"></span>
+            <span>
+              {title}
+            </span>
+          </h2>
+          <span className="description">
+            {description}
+          </span>
+        </div>
+        <div className="small-width image-container">
+          <div className="image">
+            <div className="loading-image-container">
+              <div className="image-container display-image-wrapper">
+                <img
+                  src={imageUrl}
+                  className="paper-left-image"
+                />
               </div>
-            )}
+            </div>
           </div>
-        )}
+        </div>
+        <div className="meta">
+          {validDate(date) &&
+            <span className={'date'}>
+              <span className="iconfont icon-history"></span>
+              <span>{formatDate(date)}</span>
+            </span>
+          }
+          {tags.length > 0 && (
+            <div className="tags-container" >
+              <span className='iconfont icon-tag'></span>
+              {tags.map((tag, index) => (
+                <span key={index} className={'tag'}>{tag}</span>
+              ))}
+            </div>
+          )}
+        </div>
       </div>
-
-      <div className="image-container">
-        <div className="image" style={{ width: '200px', height: '120px' }}>
+      <div className="large-width image-container">
+        <div className="image">
           <div className="loading-image-container">
             <div className="image-container display-image-wrapper">
-              <img src={imageUrl} className="paper-left-image" />
+              <img
+                src={imageUrl}
+                className="paper-left-image"
+              />
             </div>
           </div>
         </div>

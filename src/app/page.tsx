@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import "vditor/dist/index.css";
 import ArticleCard from "@/components/ArticleCard";
 import WeatherCard from "@/components/WeatherCard";
-import styles from "./page.module.css";
+import "./page.css";
 import { Http } from "../utils/http";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -74,34 +74,35 @@ export default function Home() {
   }
 
   return (
-    <div className={styles['home-container']}>
-      <div className={styles["home-banner-container"]}>
-        <div className={styles["left"]}>
-          <AnimatePresence>
-            {articles.map((article) => (
-              <motion.div
-                key={article.id}
-                initial={{ opacity: 0, x: -50 }}  // 初始位置
-                animate={{ opacity: 1, x: 0 }}    // 入场动画
-                exit={{ opacity: 0, x: 50 }}      // 离场动画
-                transition={{ duration: 0.3 }}    // 可以顺序出现
-                layout
-              >
-                <ArticleCard
-                  id={article.id}
-                  title={article.title}
-                  content={article.description.replace(/## .*\n/g, "")}
-                  date={article.adjustTime}
-                  imageUrl={article.img_url}
-                  tags={article.tags}
-                />
-              </motion.div>
-            ))}
-          </AnimatePresence>
+    <div className={"home-container"}>
+      <div className={"home-banner-container"}>
+        <div className={"left"}>
+          <div className={"c"}>
+            <AnimatePresence>
+              {articles.map((article) => (
+                <motion.div
+                  key={article.id}
+                  initial={{ opacity: 0, x: -50 }}  // 初始位置
+                  animate={{ opacity: 1, x: 0 }}    // 入场动画
+                  exit={{ opacity: 0, x: 50 }}      // 离场动画
+                  transition={{ duration: 0.3 }}    // 可以顺序出现
+                >
+                  <ArticleCard
+                    id={article.id}
+                    title={article.title}
+                    description={article.description.replace(/## .*\n/g, "")}
+                    date={article.adjustTime}
+                    imageUrl={article.img_url}
+                    tags={article.tags}
+                  />
+                </motion.div>
+              ))}
+            </AnimatePresence>
+          </div>
         </div>
 
         {/* 侧边栏 */}
-        <div className={styles["right"]}>
+        <div className={"right"}>
           <div className="c" style={{ position: 'relative', height: '100%' }}>
             <div className="scroll" style={{ position: 'sticky', top: '10px', display: 'block' }}>
               {/* 天气卡片 */}

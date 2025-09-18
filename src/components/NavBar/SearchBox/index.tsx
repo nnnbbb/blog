@@ -7,6 +7,7 @@ import TagRecommend from "./tag-recommend";
 import "./search-box.css";
 import clsx from "clsx";
 import { Http } from "@/utils/http";
+import { useRouter } from "next/navigation";
 
 const SearchBox: React.FC = () => {
   const [focused, setFocused] = useState(false);
@@ -15,6 +16,7 @@ const SearchBox: React.FC = () => {
   const [tags, setTags] = useState<string[]>([]);
   const containerRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
+  const router = useRouter()
 
   // 初始化历史
   useEffect(() => {
@@ -24,12 +26,11 @@ const SearchBox: React.FC = () => {
 
   // 获取标签
   const fetchTags = async () => {
-     Http.get<string[]>("/blog/get-tags").then(res => setTags(res));
+    Http.get<string[]>("/blog/get-tags").then(res => setTags(res));
   };
   useEffect(() => {
     fetchTags();
   }, []);
-
   // 搜索逻辑
   const handleSearch = (value: string) => {
     if (!value.trim()) return;
@@ -39,7 +40,7 @@ const SearchBox: React.FC = () => {
       setHistory(newHistory);
       localStorage.setItem(STORAGE_HISTORY_KEY, JSON.stringify(newHistory));
     }
-    Http.get("/blog/search", { q: value }).then(res => console.log(res));
+    router.push(`/blog/search?q=${value}`)
   };
 
   // 回车搜索

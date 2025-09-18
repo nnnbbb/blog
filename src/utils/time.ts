@@ -1,12 +1,16 @@
+import dayjs from "dayjs";
 
 export function formatDate(isoStr: string): string {
-  const date = new Date(isoStr);
+  const date = dayjs(isoStr);
 
-  const options: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'short',
-    day: '2-digit'
-  };
+  if (!date.isValid()) {
+    return "";
+  }
 
-  return date.toLocaleDateString('en-US', options);
+  return date.format("MMM DD, YYYY");
+}
+
+export function validDate(s: string) {
+  const date = dayjs(s);
+  return date.isValid()
 }

@@ -1,0 +1,238 @@
+.home-banner-container .left .ppt {
+  width  : 464px;
+  padding: 0px 20px;
+}
+
+.home-banner-container .left .ppt .nothing {
+  font-size  : 16px;
+  font-family: var(--base-font);
+}
+
+
+.weather-display {
+  background    : linear-gradient(var(--main-color), #68b1fa);
+  width         : 95%;
+  padding-bottom: 20px;
+}
+
+.weather-color-green {
+  background-color: #81C995;
+}
+
+.weather-color-orange {
+  background-color: #DC7C06;
+}
+
+.weather-color-blue {
+  background-color: #4954E6;
+}
+
+.weather-color-red {
+  background-color: #EE675C;
+}
+
+.weather-city {
+  margin   : 10px 20px;
+  font-size: 17px;
+  color    : rgb(242, 241, 241);
+}
+
+.weather-data {
+  margin       : 15px 40px;
+  border-radius: .3em;
+  color        : rgb(242, 241, 241);
+  width        : -moz-fit-content;
+  width        : fit-content;
+  font-size    : 30px;
+  font-family  : var(--base-font);
+}
+
+.weather-little-data {
+  margin       : 0px 30px;
+  border-radius: .3em;
+  padding      : 5px;
+  width        : -moz-fit-content;
+  width        : fit-content;
+  font-size    : 15px;
+  color        : rgb(242, 241, 241);
+  font-family  : var(--base-font);
+}
+
+
+
+
+.home-banner-container .right .top-blog .blog h2 {
+  cursor       : pointer;
+  margin-top   : 20px;
+  margin-bottom: 0;
+  max-width    : 370px;
+}
+
+.home-banner-container .right .top-blog .date {
+  font-size  : 13px;
+  margin-top : 0;
+  font-family: var(--base-font);
+}
+
+
+.progress-wrapper {
+  /* display: flex;
+    justify-content: space-around;
+    align-items: center; */
+  margin-bottom: 20px;
+}
+
+
+
+.home-container {
+  min-height     : 100vh;
+  display        : flex;
+  flex-direction : column;
+  justify-content: center;
+  align-items    : center;
+  padding        : 0 0em 0 7em;
+}
+
+@media screen and (max-width: 1680px) {
+  .home-container {
+    padding: 0 0em 0 0em;
+  }
+}
+
+@media screen and (max-width: 1280px) {
+  .home-container {
+    padding: 0 0em 0 0em;
+  }
+}
+
+@media screen and (max-width: 736px) {
+  .home-container {
+    padding: 0 0em 0 0em;
+  }
+}
+
+.home-banner-container {
+  max-width      : 1336px;
+  display        : flex;
+  justify-content: space-evenly;
+}
+
+@media screen and (max-width: 600px) {
+  .home-banner-container {
+    max-width: 100%;
+  }
+}
+
+.home-banner-container .left {
+  font-family: var(--base-font);
+}
+
+@media screen and (min-width: 800px) {
+  .home-banner-container .left {
+    min-width: 500px;
+  }
+}
+
+.home-banner-container .left .date {
+  display    : flex;
+  align-items: center;
+  font-size  : 13px;
+}
+
+.home-banner-container .left .date>span:first-child {
+  margin-right: 8px;
+}
+
+.home-banner-container .left .image {
+  width : 200px;
+  height: 120px;
+}
+
+.tags-container {
+  display    : flex;
+  align-items: center;
+}
+
+.date .iconfont {
+  margin-right: 5px;
+}
+
+.tags-container .iconfont {
+  font        : 12px;
+  margin-right: 10px;
+}
+
+.home-banner-container .left .tag {
+  margin       : 2px;
+  padding      : 2px 3px;
+  font-size    : 13px;
+  border       : 1px solid;
+  white-space  : nowrap;
+  max-width    : 50px;
+  overflow     : hidden;
+  text-overflow: ellipsis;
+  border-radius: .5em;
+  cursor       : pointer;
+  transition   : var(--animation-3s);
+}
+
+.home-banner-container .left .tag:hover {
+  background-color: var(--main-color);
+  color           : white;
+  transition      : var(--animation-3s);
+}
+
+.home-banner-container .right {
+  margin-left : 20px;
+  padding-left: 20px;
+  border-left : var(--border);
+}
+
+.home-banner-container .right .c {
+  position: relative;
+  height  : 100%;
+}
+
+.home-banner-container .right .scroll {
+  position: sticky;
+  top     : 10px;
+  display : block;
+}
+
+.home-banner-right .iconfont {
+  font-size: 16px;
+}
+
+.home-banner-right h2 {
+  margin-top: 36px;
+  font-size : 15px;
+}
+
+.see-more {
+  width          : 100%;
+  display        : flex;
+  align-items    : center;
+  justify-content: center;
+  font-size      : 18px;
+  font-family    : var(--base-font);
+  margin-top     : 30px;
+  margin-bottom  : 20px;
+}
+
+.see-more .iconfont {
+  margin-right: 5px;
+}
+
+.see-more>span {
+  padding         : 5px 12px;
+  margin          : 5px;
+  color           : white;
+  background-color: var(--main-color);
+  cursor          : pointer;
+  border-radius   : 1.5em;
+  transition      : var(--animation-5s);
+}
+
+.see-more>span:hover {
+  background-color: var(--transplant-main-color-1);
+}
