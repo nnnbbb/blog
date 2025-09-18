@@ -133,15 +133,6 @@
   }
 }
 
-.home-banner-container .left .date {
-  display    : flex;
-  align-items: center;
-  font-size  : 13px;
-}
-
-.home-banner-container .left .date>span:first-child {
-  margin-right: 8px;
-}
 
 .home-banner-container .left .image {
   width : 200px;

@@ -85,7 +85,36 @@
   overflow          : hidden;
 }
 
+.article-card-container .iconfont {
+  margin-right: 8px;
+}
+
 @media screen and (max-width: 740px) {
+  .article-card-container .blog {
+    width  : 100%;
+    padding: 0;
+  }
+
+  .article-card-container .image {
+    width     : 100% !important;
+    height    : auto !important;
+    max-height: 160px;
+    object-fit: cover;
+  }
+
+  .article-card-container h2 {
+    margin-bottom: 5px;
+  }
+
+  .article-card-container .description {
+    font-size: 14px;
+  }
+
+  .article-card-container h2 .iconfont::before,
+  .article-card-container h2 {
+    font-size: 16px;
+  }
+
   .large-width {
     display: none !important;
   }
