@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import Tooltip from "@/components/Tooltip/Tooltip";
 import { useRouter } from "next/navigation";
+import dayjs from "dayjs";
 
 interface BlogCardProps {
   id: number;
@@ -60,7 +61,7 @@ const BlogCard: React.FC<BlogCardProps> = ({ id, title, image, tags, modifiedAt 
           </div>
 
           <div style={{ fontSize: "0.9rem", marginTop: "5px" }}>
-            Modify {modifiedAt}
+            Modify {dayjs(modifiedAt).format("YYYY年MM月DD日 HH:mm")}
           </div>
         </div>
       </div>

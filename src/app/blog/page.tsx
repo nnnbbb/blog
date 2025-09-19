@@ -6,15 +6,7 @@ import styles from './blog.module.css';
 import Pagination from '../../components/Pagination';
 import { Http } from '@/utils/http';
 import { AnimatePresence, motion } from 'framer-motion';
-
-
-interface BlogItem {
-  id: number;
-  title: string;
-  imgUrl: string;
-  tags: string[];
-  adjustTime: string;
-}
+import { BlogItem } from '../../types/blog-item.interface';
 
 
 export default function Blog() {
@@ -47,7 +39,7 @@ export default function Blog() {
       flexDirection: 'column',
       alignItems: 'center',
     }}>
-      <section style={{ maxWidth: '1050px' }}>
+      <section style={{ maxWidth: '1050px', width: '100%' }}>
         <section className="banner-image-wrapper">
           <div className="loading-image-container">
             <div className="image-container">
@@ -58,7 +50,7 @@ export default function Blog() {
 
         <br />
 
-        <div className={styles["k-tabs"]} id="pivot" style={{ height: '1515px' }}>
+        <div className={styles["k-tabs"]} id="pivot" style={{ minHeight: '1515px' }}>
           <div className={styles["k-tabs-tags"]}>
             <div className={styles["k-tabs-tag-item"]} style={{ color: 'white' }}>
               <span className="iconfont icon-hack pane-icon"></span>

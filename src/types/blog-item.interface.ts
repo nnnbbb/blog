@@ -1,8 +1,9 @@
-export interface Article {
+export interface BlogItem {
   id: number;
   title: string;
-  description: string;
-  tags: string[];
   imgUrl: string;
+  tags: string[];
   adjustTime: string;
+  summary: string;
 }
+
