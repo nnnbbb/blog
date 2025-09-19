@@ -6,6 +6,10 @@ import { useRouter } from 'next/navigation';
 import { NavItem } from './nav-item';
 import { AnimatePresence, motion } from 'framer-motion';
 import SearchBox from './SearchBox';
+import "./styles.css"
+import MobileNavBar from './Mobile';
+import { navItems } from './nav-item.interface';
+
 // 定义类型
 interface DropdownItem {
   title: string;
@@ -18,37 +22,9 @@ interface NavItemType {
   dropdown?: DropdownItem[];
 }
 
-// 导航项数据
-const navItems: NavItemType[] = [
-  { title: '首页', href: '/', icon: 'icon-home' },
-  {
-    title: '博客',
-    href: '/blog',
-    icon: 'icon-blog',
-    // dropdown: [
-    //   { title: '技术博客', href: '/blog/tech' },
-    //   { title: '生活随笔', href: '/blog/life' },
-    //   { title: '思考感悟', href: '/blog/thoughts' },
-    // ],
-  },
-  { title: '音乐', href: '/music', icon: 'icon-guitar' },
-  { title: '工具箱', href: '/tools', icon: 'icon-toolbox' },
-  {
-    title: '其他',
-    href: '/others',
-    icon: 'icon-glass-cheers',
-    dropdown: [
-      { title: '收藏', href: '/others/favorites' },
-      { title: '友链', href: '/others/friends' },
-    ],
-  },
-  { title: '联系', href: '/contact', icon: 'icon-contact' },
-];
-
 export default function NavBar() {
   const [activeItem, setActiveItem] = useState('首页');
   const [visible, setVisible] = useState(true);
-  const [lastScrollY, setLastScrollY] = useState(0);
   const pathname = usePathname();
   const router = useRouter();
 
@@ -81,7 +57,7 @@ export default function NavBar() {
         className={`navigation-bar-container transition-transform duration-300 ${visible ? 'translate-y-0' : '-translate-y-full'}`}
       >
         <div className="navigation-bar-body">
-          <div className="left">
+          <div className="large-nav left">
             {/* Logo区域 */}
             <div className="website-icon" onClick={() => router.push("/")}>
               <img src="https://kirigaya.cn/favicon.png" alt="" className="w-[45px] h-[45px]" />
@@ -100,20 +76,20 @@ export default function NavBar() {
               ))}
             </div>
           </div>
-          <div className="right">
+          <div className="large-nav right">
             {/* 右侧功能区 */}
             {/* 搜索框 */}
             <SearchBox />
 
             {/* 右侧按钮组 */}
 
-            <div className="flex " >
+            <div className="flex" >
               {/* 写点什么按钮 */}
               <div>
                 <div
                   onMouseEnter={() => setOpen(true)}
                   onMouseLeave={() => setOpen(false)}
-                  className="navigation-item-container items-center px-3 py-2 text-gray-700 "
+                  className="navigation-item-container items-center"
                 >
                   <div className="navigation-content-item-container">
 
@@ -158,7 +134,7 @@ export default function NavBar() {
               {/* 评论按钮 */}
               <div>
                 <div
-                  className="navigation-item-container items-center px-3 py-2 text-gray-700 hover:text-purple-600"
+                  className="navigation-item-container items-center"
                 >
                   <div className="navigation-content-item-container">
                     <span className="iconfont icon-comment !text-[1.2rem]"></span>
@@ -166,10 +142,10 @@ export default function NavBar() {
                   </div>
                 </div>
               </div>
-
-
             </div>
           </div>
+
+          <MobileNavBar />
         </div>
 
       </div>

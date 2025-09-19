@@ -1,17 +1,55 @@
 /* 图标样式文件 */
-@font-face {
+/* @font-face {
   font-family : 'iconfont';
   src         : url('https://kirigaya.cn/fonts/iconfont.956654d9.woff2') format('woff2');
   font-weight : normal;
   font-style  : normal;
   font-display: swap;
+} */
+
+@font-face {
+  font-family : "iconfont";
+  /* Project id 3899231 */
+  src         : url("https://kirigaya.cn/fonts/iconfont.53f75585.woff2") format('woff2');
+  font-weight : normal;
+  font-style  : normal;
+  font-display: swap;
 }
+
 .iconfont {
-  font-family               : "iconfont" !important;
-  /* font-size              : 16px; */
-  font-style                : normal;
-  -webkit-font-smoothing    : antialiased;
-  -moz-osx-font-smoothing   : grayscale;
+  font-family: "iconfont" !important;
+
+  font-style             : normal;
+  -webkit-font-smoothing : antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-server1:before {
+  content: "\e679";
+}
+
+.icon-user:before {
+  content: "\e677";
+}
+
+.icon-app:before {
+  content: "\e666";
+}
+
+.icon-download1:before {
+  content: "\e623";
+}
+
+.icon-lightning:before {
+  content: "\e624";
+}
+
+.icon-fanhui:before {
+  content: "\e6c8";
+}
+
+.icon-more:before {
+  content: "\e60f";
 }
 
 .icon-copy:before {

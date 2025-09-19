@@ -1,24 +1,8 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { DropdownItem, NavItemProps } from "./nav-item.interface";
 // 定义类型
-interface DropdownItem {
-  title: string;
-  href: string;
-}
-// 导航项组件，支持下拉菜单
-interface NavItemProps {
-  item: NavItemType;
-  isActive: boolean;
-  onClick: (title: string) => void;
-}
-interface NavItemType {
-  title: string;
-  href: string;
-  icon: string;
-  dropdown?: DropdownItem[];
-}
-
 export function NavItem({ item, isActive, onClick }: NavItemProps) {
   const [showDropdown, setShowDropdown] = useState(false);
   const router = useRouter();
