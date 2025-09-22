@@ -14,7 +14,7 @@ const Search: React.FC = () => {
   const [total, setTotal] = useState(100);
   const [page, setPage] = useState(1);
   const loadMoreRef = React.useRef<HTMLDivElement | null>(null);
-  const pageSize = 9;
+  const pageSize = 20;
   const q = searchParams.get("q") || "";
   const hasMore = articles.length < total;
   useEffect(() => {
@@ -84,6 +84,7 @@ const Search: React.FC = () => {
                 <AnimatePresence>
                   {articles.map((article, index) => (
                     <motion.div
+                      className="article-wrapper"
                       key={`${article.id}-${index}`}
                       initial={{ opacity: 0, x: -50 }}  // 初始位置
                       animate={{ opacity: 1, x: 0 }}    // 入场动画

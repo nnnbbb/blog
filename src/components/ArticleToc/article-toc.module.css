@@ -330,10 +330,10 @@
   transition : var(--animation-5s);
 }
 
-.category-title {
-  font-size  : 18px;
-  color      : black;
-  font-weight: 500;
+@media screen and (max-width: 740px) {
+  .float-article-tool-wrapper {
+    display: none;
+  }
 }
 
 .category {

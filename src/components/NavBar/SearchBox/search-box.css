@@ -20,7 +20,7 @@
   }
 
   .search-box-container.focus {
-    width     : 400px !important;
+    width     : 340px !important;
     transition: var(--animation-7s) !important;
   }
 
@@ -40,7 +40,7 @@
   font-family  : var(--base-font);
   width        : 540px;
   border       : none;
-  border-radius: .9em;
+  border-radius: 12px;
   transition   : var(--animation-3s);
 }
 

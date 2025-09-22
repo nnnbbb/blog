@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef, useState } from "react";
-import Tooltip from "@/components/Tooltip/Tooltip";
+import Tooltip from "@/components/Tooltip";
 import { useRouter } from "next/navigation";
 import dayjs from "dayjs";
 
