@@ -1,0 +1,22 @@
+.iconSize {
+  font-size: 22px !important;
+}
+
+.copyright-container .ref-link>span {
+  margin     : 7px;
+  display    : flex;
+  align-items: center;
+}
+
+.copyright-container {
+  display         : flex;
+  justify-content : space-evenly;
+  padding         : 30px;
+  margin-top      : 50px;
+}
+
+@media screen and (max-width: 740px) {
+  .copyright-container {
+    flex-direction: column;
+  }
+}

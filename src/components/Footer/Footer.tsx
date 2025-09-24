@@ -1,5 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
+import './styles.css'
+import { footerConfig } from '../../config/footer';
 
 interface FooterLinkProps {
   href: string;
@@ -27,9 +29,9 @@ const Footer = () => {
       <div className="copyright-container mx-auto justify-evenly flex md:flex-row" >
         {/* 左侧个人信息 */}
         <div className="ref-link flex flex-col font-bold">
-          <h2 className="font-medium text-gray-800">养心阁 - 锦恢的私人博客</h2>
-          <span className="text-gray-600 ">Email: 1193466151@qq.com</span>
-          <span className="text-gray-600 ">Copyright © 2022-2025 锦恢 All Rights Reserved</span>
+          <h2 className="font-medium text-gray-800">{footerConfig.title}</h2>
+          <span className="text-gray-600 ">Email: {footerConfig.email}</span>
+          <span className="text-gray-600 ">{footerConfig.copyright}</span>
           <span>
             <Link
               href="https://beian.miit.gov.cn/"
@@ -37,7 +39,7 @@ const Footer = () => {
               rel="noopener noreferrer"
               className="text-purple-500  hover:text-purple-700"
             >
-              苏ICP备2022010563号-2
+              {footerConfig.icp.text}
             </Link>
           </span>
         </div>

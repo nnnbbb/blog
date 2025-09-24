@@ -346,3 +346,34 @@
   border       : 1px solid var(--main-color);
   margin-right : 20px;
 }
+
+.portrait-text {
+  border-radius     : 0.8em;
+  text-align        : center;
+  color             : white;
+  transition        : var(--animation-3s);
+  -webkit-transition: var(--animation-3s);
+}
+
+.login-placeholder {
+  margin-left  : 10px;
+  border-radius: 0.8em;
+
+  background        : var(--main-color);
+  width             : 45px;
+  height            : 45px;
+  overflow          : hidden;
+  cursor            : pointer;
+  white-space       : nowrap;
+  text-overflow     : ellipsis;
+  overflow          : hidden;
+  display           : flex;
+  text-align        : center;
+  align-items       : center;
+  justify-content   : center;
+  color             : white;
+  font-size         : 13px;
+  font-family       : var(--base-font), serif;
+  transition        : var(--animation-3s);
+  -webkit-transition: var(--animation-3s);
+}
