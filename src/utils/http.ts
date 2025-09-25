@@ -58,7 +58,7 @@ export const CreateHttp = (props: CreateHttpProps = {}): IAxiosInstance => {
       else if (status === 404) errMsg = "接口不存在";
       else if (status === 500) errMsg = "服务器错误";
       if (errorHandling) onError?.(errMsg);
-      return Promise.reject(error);
+      // return Promise.reject(error);
     }
   );
 

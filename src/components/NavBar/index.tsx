@@ -9,6 +9,8 @@ import SearchBox from './SearchBox';
 import "./styles.css"
 import MobileNavBar from './Mobile';
 import { navItems } from './nav-item.interface';
+import UserInfo from '../UserCenter/UserInfo';
+import Longin from '../UserCenter/Login';
 
 // 定义类型
 interface DropdownItem {
@@ -27,6 +29,11 @@ export default function NavBar() {
   const [visible, setVisible] = useState(true);
   const pathname = usePathname();
   const router = useRouter();
+  const [isLogin, setIsLogin] = useState(() => {
+    return Boolean(localStorage.getItem("token"));
+  });
+  const [loginShow, setLoginShow] = useState(false);
+  const [userInfoShow, setUserInfoShow] = useState(false);
 
   const [open, setOpen] = useState(false);
 
@@ -50,6 +57,14 @@ export default function NavBar() {
     }
   }, [pathname]);
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      setIsLogin(true);
+    } else {
+      setIsLogin(false);
+    }
+  }, [loginShow]);
 
   return (
     <div>
@@ -83,66 +98,80 @@ export default function NavBar() {
 
             {/* 右侧按钮组 */}
 
-            <div className="flex" >
-              {/* 写点什么按钮 */}
-              <div>
-                <div
-                  onMouseEnter={() => setOpen(true)}
-                  onMouseLeave={() => setOpen(false)}
-                  className="navigation-item-container items-center"
-                >
-                  <div className="navigation-content-item-container">
+            {/* 写点什么按钮 */}
+            <div>
+              <div
+                onMouseEnter={() => setOpen(true)}
+                onMouseLeave={() => setOpen(false)}
+                className="navigation-item-container items-center"
+              >
+                <div className="navigation-content-item-container">
 
-                    <span className="iconfont icon-write !text-[1.2rem]"></span>
-                    <span className="navigation-item-text">写点什么</span>
-                  </div>
-                  <AnimatePresence>
-                    {open && (
-                      <motion.div
-                        initial={{ opacity: 0, scaleY: 0 }}
-                        animate={{ opacity: 1, scaleY: 1 }}
-                        exit={{ opacity: 0, scaleY: 0 }}
-                        transition={{ duration: 0.25, ease: "easeOut" }}
-                        style={{ originY: 0 }} // 以顶部为展开基准
+                  <span className="iconfont icon-write !text-[1.2rem]"></span>
+                  <span className="navigation-item-text">写点什么</span>
+                </div>
+                <AnimatePresence>
+                  {open && (
+                    <motion.div
+                      initial={{ opacity: 0, scaleY: 0 }}
+                      animate={{ opacity: 1, scaleY: 1 }}
+                      exit={{ opacity: 0, scaleY: 0 }}
+                      transition={{ duration: 0.25, ease: "easeOut" }}
+                      style={{ originY: 0 }} // 以顶部为展开基准
+                    >
+                      <div
+                        className="navigation-item-tooltip "
+                        style={{ width: "130px", transform: "translate(-50px, 10px)" }}
                       >
-                        <div
-                          className="navigation-item-tooltip "
-                          style={{ width: "130px", transform: "translate(-50px, 10px)" }}
-                        >
-                          <div className="write-icon-container p-2">
-                            <div
-                              className="page-item"
-                              onClick={() => router.push("/markdown")}
-                            >
-                              <div className="iconfont icon-edit-blog">&ensp;写博客</div>
-                              <span></span>
-                            </div>
+                        <div className="write-icon-container p-2">
+                          <div
+                            className="page-item"
+                            onClick={() => router.push("/markdown")}
+                          >
+                            <div className="iconfont icon-edit-blog">&ensp;写博客</div>
+                            <span></span>
                           </div>
                         </div>
+                      </div>
 
-                        <div>
-                          <div className="navigation-item-arrow"></div>
-                          <div className="navigation-arrow-mask"></div>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
+                      <div>
+                        <div className="navigation-item-arrow"></div>
+                        <div className="navigation-arrow-mask"></div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
 
-                </div>
               </div>
+            </div>
 
-              {/* 评论按钮 */}
-              <div>
-                <div
-                  className="navigation-item-container items-center"
-                >
-                  <div className="navigation-content-item-container">
-                    <span className="iconfont icon-comment !text-[1.2rem]"></span>
-                    <span className="navigation-item-text">评论</span>
-                  </div>
+            {/* 评论按钮 */}
+            <div>
+              <div
+                className="navigation-item-container items-center"
+              >
+                <div className="navigation-content-item-container">
+                  <span className="iconfont icon-comment !text-[1.2rem]"></span>
+                  <span className="navigation-item-text">评论</span>
                 </div>
               </div>
             </div>
+            {/* 登录 */}
+            <div onClick={() => {
+              isLogin ? setUserInfoShow(true) : setLoginShow(true)
+            }}>
+              <div
+                className="login-wrapper">
+                <div>
+                  <div className="login-placeholder">
+                    <div className="portrait-text">{isLogin ? 'x' : '未登录'}</div>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <Longin show={loginShow} setShow={setLoginShow} />
+            <UserInfo show={userInfoShow} setShow={setUserInfoShow} />
           </div>
 
           <MobileNavBar />
