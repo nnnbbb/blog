@@ -30,7 +30,9 @@ export default function NavBar() {
   const pathname = usePathname();
   const router = useRouter();
   const [isLogin, setIsLogin] = useState(() => {
-    return Boolean(localStorage.getItem("token"));
+    if (typeof window !== "undefined") {
+      return Boolean(localStorage.getItem("token"));
+    }
   });
   const [loginShow, setLoginShow] = useState(false);
   const [userInfoShow, setUserInfoShow] = useState(false);
