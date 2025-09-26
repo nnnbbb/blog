@@ -58,23 +58,6 @@
   font-family  : var(--base-font);
 }
 
-
-
-
-.home-banner-container .right .top-blog .blog h2 {
-  cursor       : pointer;
-  margin-top   : 20px;
-  margin-bottom: 0;
-  max-width    : 370px;
-}
-
-.home-banner-container .right .top-blog .date {
-  font-size  : 13px;
-  margin-top : 0;
-  font-family: var(--base-font);
-}
-
-
 .progress-wrapper {
   /* display: flex;
     justify-content: space-around;
@@ -188,15 +171,6 @@
   position: sticky;
   top     : 10px;
   display : block;
-}
-
-.home-banner-right .iconfont {
-  font-size: 16px;
-}
-
-.home-banner-right h2 {
-  margin-top: 36px;
-  font-size : 15px;
 }
 
 .see-more {
