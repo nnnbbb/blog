@@ -11,6 +11,7 @@ import MobileNavBar from './Mobile';
 import { navItems } from './nav-item.interface';
 import UserInfo from '../UserCenter/UserInfo';
 import Longin from '../UserCenter/Login';
+import { useMounted } from '@/hooks/useMounted';
 
 // 定义类型
 interface DropdownItem {
@@ -29,6 +30,9 @@ export default function NavBar() {
   const [visible, setVisible] = useState(true);
   const pathname = usePathname();
   const router = useRouter();
+
+  const mounted = useMounted();
+
   const [isLogin, setIsLogin] = useState(() => {
     if (typeof window !== "undefined") {
       return Boolean(localStorage.getItem("token"));
@@ -166,7 +170,9 @@ export default function NavBar() {
                 className="login-wrapper">
                 <div>
                   <div className="login-placeholder">
-                    <div className="portrait-text">{isLogin ? 'x' : '未登录'}</div>
+                    <div className="portrait-text">
+                      {mounted ? (isLogin ? 'x' : '未登录') : null}
+                    </div>
                   </div>
 
                 </div>

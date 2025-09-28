@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import "../style.css"
+import { useMounted } from "@/hooks/useMounted";
 
 interface UserInfoProps {
   show?: boolean
@@ -10,11 +11,7 @@ interface UserInfoProps {
 }
 
 export default function UserInfo({ show, setShow }: UserInfoProps) {
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
+  const mounted = useMounted();
 
   const inputBox = (<div className="input-box-wrapper" style={{ display: show ? '' : 'none' }}>
     <div className="dialog-box user-info-box" style={{}}>

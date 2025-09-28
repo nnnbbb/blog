@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import styles from "./drawer.module.css";
+import { useMounted } from "@/hooks/useMounted";
 
 interface DrawerProps {
   visible: boolean;
@@ -18,10 +19,7 @@ export default function Drawer({
   children,
 }: DrawerProps) {
   const drawerRef = useRef<HTMLDivElement>(null);
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  const mounted = useMounted();
 
   useEffect(() => {
     if (!visible) return;

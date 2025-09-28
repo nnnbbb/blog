@@ -4,6 +4,7 @@ import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import "../style.css"
 import { createPortal } from "react-dom";
 import { Http } from "../../../utils/http";
+import { useMounted } from "@/hooks/useMounted";
 
 interface LonginProps {
   show?: boolean
@@ -11,7 +12,7 @@ interface LonginProps {
 }
 
 export default function Longin({ show, setShow }: LonginProps) {
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
@@ -20,9 +21,6 @@ export default function Longin({ show, setShow }: LonginProps) {
     localStorage.setItem("token", res)
     setShow(false)
   }
-  useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const inputBox = (<>
     <div className="input-box-wrapper" style={{ display: show ? "" : "none" }}>

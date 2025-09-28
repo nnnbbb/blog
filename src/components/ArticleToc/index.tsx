@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import clsx from "clsx";
 import styles from "./article-toc.module.css";
+import { useMounted } from "@/hooks/useMounted";
 
 export interface TocItem {
   id: string;
@@ -17,11 +18,8 @@ interface ArticleTocProps {
 
 export default function ArticleToc({ items }: ArticleTocProps) {
   const [activeId, setActiveId] = useState<string>(items[0]?.id || "");
-  const [mounted, setMounted] = useState(false);
+  const mounted = useMounted();
 
-  React.useEffect(() => {
-    setMounted(true);
-  }, []);
 
   const handleClick = (id: string) => {
     setActiveId(id);
