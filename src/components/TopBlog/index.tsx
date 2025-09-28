@@ -24,8 +24,10 @@ export default function TopBlog() {
     <h2>
       <span className="iconfont icon-top">置顶博客</span>
     </h2>
-    {articles.map(item => {
-      return <div className="blog">
+    {articles.map(item =>
+      <div
+        key={item.id}
+        className="blog">
         <h2 className="hover-effect-1">
           {item.title}
         </h2>
@@ -34,6 +36,6 @@ export default function TopBlog() {
           <span>{formatDate(item.adjustTime)}</span>
         </div>
       </div>
-    })}
+    )}
   </div>
 }
