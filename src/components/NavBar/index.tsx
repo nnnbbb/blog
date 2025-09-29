@@ -12,6 +12,7 @@ import { navItems } from './nav-item.interface';
 import UserInfo from '../UserCenter/UserInfo';
 import Longin from '../UserCenter/Login';
 import { useMounted } from '@/hooks/useMounted';
+import { useAuth } from '../../hooks/useAuth';
 
 // 定义类型
 interface DropdownItem {
@@ -33,11 +34,7 @@ export default function NavBar() {
 
   const mounted = useMounted();
 
-  const [isLogin, setIsLogin] = useState(() => {
-    if (typeof window !== "undefined") {
-      return Boolean(localStorage.getItem("token"));
-    }
-  });
+  const [isLogin, setIsLogin] = useAuth();
   const [loginShow, setLoginShow] = useState(false);
   const [userInfoShow, setUserInfoShow] = useState(false);
 

@@ -9,6 +9,13 @@ import { useRouter } from 'next/navigation';
 
 interface PublishFormProps {
   markdown: string;
+  title: string;
+  setTitle: React.Dispatch<React.SetStateAction<string>>
+  imgUrl: string;
+  setImgUrl: React.Dispatch<React.SetStateAction<string>>
+  selectedTags: string[];
+  setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>
+  publishArticle: () => Promise<void>
 }
 
 const SelectedItem: React.FC<{
@@ -84,15 +91,20 @@ function CoverImg({ imgUrl, setImgUrl }: CoverImgProps) {
   )
 }
 
-export default function PublishForm({ markdown }: PublishFormProps) {
-  const [title, setTitle] = useState("");
-  const [imgUrl, setImgUrl] = useState("");
+export default function PublishForm({
+  markdown,
+  title,
+  setTitle,
+  imgUrl,
+  setImgUrl,
+  selectedTags,
+  setSelectedTags,
+  publishArticle,
+}: PublishFormProps) {
   const [recommendTags, setRecommendTags] = useState<string[]>([]);
   const [optionsVisible, setOptionsVisible] = useState(false);
-  const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [tags, setTags] = useState<string[]>([]);
   const [tagInput, setTagInput] = useState("");
-  const router = useRouter();
 
   useEffect(() => {
     Http.get<string[]>("/blog/get-tags")
@@ -101,39 +113,6 @@ export default function PublishForm({ markdown }: PublishFormProps) {
 
   const toggleOptions = () => setOptionsVisible(prev => !prev);
 
-  const createArticle = async () => {
-    if (!markdown.trim()) {
-      toast("文章内容不能为空！");
-      return;
-    }
-    if (!title.trim()) {
-      toast("请填写文章标题！");
-      return;
-    }
-    if (!imgUrl.trim()) {
-      toast("请填写封面图片链接！");
-      return;
-    }
-
-    try {
-      const res = await Http.post("/blog", {
-        title,
-        content: markdown,
-        tags: selectedTags,
-        imgUrl
-      });
-
-      setTitle("");
-      setImgUrl("");
-      setSelectedTags([]);
-      toast('文章发布成功！');
-      router.push(`/blog/article?seq=${res.id}`);
-
-    } catch (err) {
-      console.error("发布失败", err);
-      toast("发布失败，请稍后重试！");
-    }
-  };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const value = e.target.value.trim();
     setTagInput(value);
@@ -311,7 +290,7 @@ export default function PublishForm({ markdown }: PublishFormProps) {
       <div className={styles['publish-button']}>
         <button
           className={styles['publishBtn']}
-          onClick={createArticle}>
+          onClick={publishArticle}>
           <span className='iconfont icon-publish'> 发布到我的博客</span>
         </button>
       </div>

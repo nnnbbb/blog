@@ -53,10 +53,16 @@ export const CreateHttp = (props: CreateHttpProps = {}): IAxiosInstance => {
     error => {
       let errMsg = "网络错误，请稍后重试";
       const status = error.response?.status;
-      if (status === 401) { errMsg = "未授权或登录已过期"; localStorage.removeItem("token"); }
-      else if (status === 403) errMsg = "没有权限访问该资源";
-      else if (status === 404) errMsg = "接口不存在";
-      else if (status === 500) errMsg = "服务器错误";
+      if (status === 401) {
+        errMsg = "未授权或登录已过期";
+        localStorage.removeItem("token");
+      } else if (status === 403) {
+        errMsg = "没有权限访问该资源";
+      } else if (status === 404) {
+        errMsg = "接口不存在";
+      } else if (status === 500) {
+        errMsg = "服务器错误";
+      }
       if (errorHandling) onError?.(errMsg);
       // return Promise.reject(error);
     }

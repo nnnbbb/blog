@@ -1,17 +1,18 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { useSearchParams } from "next/navigation";
+import { useRouter, useSearchParams } from "next/navigation";
 import dayjs from "dayjs";
 import { motion, AnimatePresence } from "framer-motion";
 import LMarkdown from "@/components/LMarkdown";
-import ArticleToc from "@/components/ArticleToc";
 import readingTime from "reading-time";
 import wordCount from "word-count";
 import { Http } from "@/utils/http";
 import { decodeGzipBase64 } from "@/utils/compression";
 import styles from "./article.module.css";
 import TagList from "./tag-list";
+import { toast } from "@/components/Toast";
+import { useAuth } from "@/hooks/useAuth";
 
 interface IArticle {
   title?: string;
@@ -27,15 +28,14 @@ export default function Article() {
   const [stats, setStats] = useState({ words: 0, time: 0 });
   const [article, setArticle] = useState<IArticle>();
   const [loaded, setLoaded] = useState(false);
-
   const [tags, setTags] = useState<string[]>([]);
+  const [isLogin, setIsLogin] = useAuth();
+  const router = useRouter()
 
   const searchParams = useSearchParams();
   const seq = searchParams?.get("seq");
 
-  useEffect(() => {
-    if (!seq) return;
-
+  const fetchBlog = () => {
     Http.get("/blog/fetch-blog-by-seq", { seq })
       .then((res: IArticle) => {
         setArticle(res);
@@ -56,6 +56,16 @@ export default function Article() {
       .catch(err => {
         console.error('获取文章失败', err)
       })
+  }
+  const deleteBlog = () => {
+    if (!seq) return;
+    Http.delete(`/blog/${seq}`)
+    router.push("/")
+    toast('文章删除成功！');
+  }
+  useEffect(() => {
+    if (!seq) return;
+    fetchBlog();
   }, [seq])
 
   return (
@@ -106,7 +116,15 @@ export default function Article() {
                 <LMarkdown markdown={markdown} showToc={true} />
               </section>
               <TagList tags={tags} />
-
+              {isLogin &&
+                (<div style={{ width: '60%', display: "flex", gap: '10px' }}>
+                  <button className="primary" onClick={() => router.push(`/markdown?seq=${seq}`)}>
+                    <span className="iconfont icon-edit-circle"></span> &ensp;编辑
+                  </button>
+                  <button onClick={deleteBlog}>
+                    <span className="iconfont icon-trash-bin"></span> &ensp;删除
+                  </button>
+                </div>)}
             </div>
           </motion.section>
         )}
