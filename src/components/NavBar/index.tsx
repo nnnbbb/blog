@@ -70,7 +70,7 @@ export default function NavBar() {
     } else {
       setIsLogin(false);
     }
-  }, [loginShow]);
+  }, [loginShow, userInfoShow]);
 
   return (
     <div>
@@ -81,8 +81,8 @@ export default function NavBar() {
           <div className="large-nav left">
             {/* Logo区域 */}
             <div className="website-icon" onClick={() => router.push("/")}>
-              <img src="https://kirigaya.cn/favicon.png" alt="" className="w-[45px] h-[45px]" />
-              <span>养心阁</span>
+              <img src="/favicon.png" alt="" className="w-[45px] h-[45px]" />
+              <span>神机阁</span>
             </div>
 
             {/* 导航菜单区域 */}

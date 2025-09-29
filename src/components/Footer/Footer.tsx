@@ -81,13 +81,13 @@ const Footer = () => {
           <span className="flex items-center">
             <FooterLink href="https://www.zhihu.com/">
               <i className={`iconfont footer-icon icon-zhihu-circle-fill mr-2`}></i>
-              知乎@锦恢
+              知乎@星河
             </FooterLink>
           </span>
           <span className="flex items-center">
             <FooterLink href="https://www.bilibili.com/">
               <i className={`iconfont footer-icon icon-bilibili mr-2`}></i>
-              Bilibili@锦恢
+              Bilibili@星河
             </FooterLink>
           </span>
           <span className="flex items-center">
@@ -105,7 +105,7 @@ const Footer = () => {
           <span className="flex items-center">
             <FooterLink href="https://store.steampowered.com/">
               <i className={`iconfont footer-icon icon-steam mr-2`}></i>
-              Steam@锦恢
+              Steam@星河
             </FooterLink>
           </span>
 

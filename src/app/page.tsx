@@ -7,6 +7,7 @@ import WeatherCard from "@/components/WeatherCard";
 import "./page.css";
 import { Http } from "../utils/http";
 import { AnimatePresence, motion } from "framer-motion";
+import TopBlog from "../components/TopBlog";
 
 interface Article {
   id: number;
@@ -116,36 +117,7 @@ export default function Home() {
               />
 
               {/* 置顶博客 */}
-              <div style={{
-                background: 'rgba(255, 255, 255, 0.8)',
-                borderRadius: '12px',
-                padding: '20px',
-                boxShadow: '0 4px 6px rgba(0, 0, 0, 0.1)',
-                width: '80%'
-              }}>
-                <div style={{ display: 'flex', alignItems: 'center', marginBottom: '15px' }}>
-                  <span style={{ marginRight: '10px', fontSize: '1.2rem' }}>📌</span>
-                  <h3 style={{ margin: '0', fontSize: '1rem' }}>置顶博客</h3>
-                </div>
-
-                <div style={{ marginBottom: '15px' }}>
-                  <p style={{ margin: '0 0 5px 0', fontWeight: 'bold' }}>全网第一个 MCP 服务器一体化开发测试软件 OpenMCP 发布!</p>
-                  <div style={{ display: 'flex', alignItems: 'center', color: '#888', fontSize: '0.8rem' }}>
-                    <span>Apr 13, 2025</span>
-                  </div>
-                </div>
-
-                <div style={{ marginBottom: '15px' }}>
-                  <p style={{ margin: '0 0 5px 0', fontWeight: 'bold' }}>闲聊式问答机器人状态机设计</p>
-                  <div style={{ display: 'flex', alignItems: 'center', color: '#888', fontSize: '0.8rem' }}>
-                    <span>Jun 02, 2024</span>
-                  </div>
-                </div>
-
-                <div>
-                  <p style={{ margin: '0 0 5px 0', fontWeight: 'bold' }}>EDL (Evidential Deep Learning) 原理与代码实现</p>
-                </div>
-              </div>
+              <TopBlog />
             </div>
 
           </div>

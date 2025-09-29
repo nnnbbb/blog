@@ -24,12 +24,12 @@ export default function MobileNavBar() {
           >
             <div className="website-icon">
               <img
-                src="https://kirigaya.cn/favicon.png"
+                src="/favicon.png"
                 alt=""
                 height="45"
                 width="45"
               />
-              <span>养心阁</span>
+              <span>神机阁</span>
             </div>
           </motion.div>
         )}

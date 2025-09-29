@@ -130,7 +130,7 @@ export default function Longin({ show, setShow }: LonginProps) {
           </div>
           <div className="switch_container" id="switch-c2">
             <h2 className="switch_title title" style={{ letterSpacing: 0 }}>
-              欢迎来到汇尘轩
+              欢迎来到神机阁
             </h2>
             <p className="switch_description description">
               如果需要注册新的账号，请点击“注册”；否则点击“返回”返回主界面

@@ -7,12 +7,15 @@ import { useMounted } from "@/hooks/useMounted";
 
 interface UserInfoProps {
   show?: boolean
-  setShow?: Dispatch<SetStateAction<boolean>>
+  setShow: Dispatch<SetStateAction<boolean>>
 }
 
 export default function UserInfo({ show, setShow }: UserInfoProps) {
   const mounted = useMounted();
-
+  const logOut = () => {
+    localStorage.removeItem("token")
+    setShow(false)
+  }
   const inputBox = (<div className="input-box-wrapper" style={{ display: show ? '' : 'none' }}>
     <div className="dialog-box user-info-box" style={{}}>
       <div style={{ display: "flex", justifyContent: "space-between" }}>
@@ -20,7 +23,7 @@ export default function UserInfo({ show, setShow }: UserInfoProps) {
           <span className="iconfont icon-hack" /> 用户信息{" "}
         </h2>
         <div>
-          <div onClick={() => setShow?.(false)} className="little-close"> × </div>
+          <div onClick={() => setShow(false)} className="little-close"> × </div>
         </div>
       </div>
       <div className="user-info-main">
@@ -79,7 +82,7 @@ export default function UserInfo({ show, setShow }: UserInfoProps) {
             <button className="user-info-button primary">
               <span className="iconfont icon-edit-circle" /> 修改{" "}
             </button>
-            <button className="user-info-button">
+            <button className="user-info-button" onClick={logOut}>
               <span className="iconfont icon-exit" /> 登出{" "}
             </button>
           </div>
