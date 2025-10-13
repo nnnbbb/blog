@@ -30,7 +30,8 @@ export default function Article() {
   const [loaded, setLoaded] = useState(false);
   const [tags, setTags] = useState<string[]>([]);
   const [isLogin, setIsLogin] = useAuth();
-  const router = useRouter()
+  const [showActions, setShowActions] = useState(false);
+  const router = useRouter();
 
   const searchParams = useSearchParams();
   const seq = searchParams?.get("seq");
@@ -42,35 +43,35 @@ export default function Article() {
         setTime(dayjs(res.adjustTime).format("MMM DD, YYYY"));
         const content = decodeGzipBase64(res.content!);
         setMarkdown(content);
-
-        setTags(res.tags)
+        setTags(res.tags);
         const wordStats = wordCount(content);
         const timeStats = readingTime(content);
         setStats({
           words: wordStats,
           time: Math.ceil(timeStats.minutes),
-        })
+        });
+        setLoaded(true);
+      })
+      .catch((err) => {
+        console.error("获取文章失败", err);
+      });
+  };
 
-        setLoaded(true) // 数据加载完成后触发动画
-      })
-      .catch(err => {
-        console.error('获取文章失败', err)
-      })
-  }
   const deleteBlog = () => {
     if (!seq) return;
-    Http.delete(`/blog/${seq}`)
-    router.push("/")
-    toast('文章删除成功！');
-  }
+    Http.delete(`/blog/${seq}`).then(() => {
+      toast("文章删除成功！");
+      router.push("/");
+    });
+  };
+
   useEffect(() => {
     if (!seq) return;
     fetchBlog();
-  }, [seq])
+  }, [seq]);
 
   return (
     <div style={{ minHeight: "100vh" }}>
-
       <AnimatePresence>
         {loaded && (
           <motion.section
@@ -80,26 +81,78 @@ export default function Article() {
             transition={{ duration: 0.6, ease: "easeOut" }}
           >
             <div className={styles["dustblog-container"]}>
-              <div className={styles["dustblog-title"]}>
-                <h1>{article?.title}</h1>
+              {/* ===== 标题部分 ===== */}
+              <div
+                className={styles["dustblog-title"]}
+                style={{ position: "relative" }}
+              >
+                <h1
+                  onClick={() => {
+                    if (isLogin) setShowActions(!showActions);
+                  }}
+                  style={{
+                    cursor: isLogin ? "pointer" : "default",
+                    userSelect: "none",
+                  }}
+                >
+                  {article?.title}
+                </h1>
+
+                {/* ===== 编辑/删除按钮 ===== */}
+                {isLogin && showActions && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      // position: "absolute",
+                      top: "100%",
+                      left: 0,
+                      marginTop: "10px",
+                    }}
+                  >
+                    <button
+                      className="primary"
+                      onClick={() => router.push(`/markdown?seq=${seq}`)}
+                    >
+                      <span className="iconfont icon-edit-circle"></span> 编辑
+                    </button>
+                    <button onClick={deleteBlog}>
+                      <span className="iconfont icon-trash-bin"></span> 删除
+                    </button>
+                  </motion.div>
+                )}
               </div>
-              <div className={`${styles["reading-time"]} ${styles["dustblog-body"]}`}>
+
+              {/* ===== 字数和时间 ===== */}
+              <div
+                className={`${styles["reading-time"]} ${styles["dustblog-body"]}`}
+              >
                 <div>
-                  <span className={`${styles["iconfont"]} iconfont icon-read`} />
+                  <span
+                    className={`${styles["iconfont"]} iconfont icon-read`}
+                  />
                   <span className="TagTag">
                     本文字数 <span className="underline">{stats.words}</span>
                   </span>
                   <span className="sp">&nbsp;-&nbsp;</span>
                   <span>
-                    阅读时间约为 <span className="underline">{stats.time} 分钟</span>
+                    阅读时间约为{" "}
+                    <span className="underline">{stats.time} 分钟</span>
                   </span>
                 </div>
                 <div>
-                  <span className={`${styles["iconfont"]} iconfont icon-write`} />
+                  <span
+                    className={`${styles["iconfont"]} iconfont icon-write`}
+                  />
                   <span>{time}</span>
                 </div>
               </div>
 
+              {/* ===== 封面图 ===== */}
               {article?.imgUrl && (
                 <div className={styles["dustblog-cover"]}>
                   <div className="loading-image-container">
@@ -112,19 +165,13 @@ export default function Article() {
 
               <hr className={styles["hr"]} />
 
+              {/* ===== 正文 ===== */}
               <section className={`${styles["dustblog-body"]} markdown`}>
                 <LMarkdown markdown={markdown} showToc={true} />
               </section>
+
+              {/* ===== 标签 ===== */}
               <TagList tags={tags} />
-              {isLogin &&
-                (<div style={{ width: '60%', display: "flex", gap: '10px' }}>
-                  <button className="primary" onClick={() => router.push(`/markdown?seq=${seq}`)}>
-                    <span className="iconfont icon-edit-circle"></span> &ensp;编辑
-                  </button>
-                  <button onClick={deleteBlog}>
-                    <span className="iconfont icon-trash-bin"></span> &ensp;删除
-                  </button>
-                </div>)}
             </div>
           </motion.section>
         )}
