@@ -309,9 +309,9 @@
 }
 
 
-:root {
+/* :root {
   --category-width: 300px;
-}
+} */
 
 .float-article-tool-wrapper {
   position   : fixed;

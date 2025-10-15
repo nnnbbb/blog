@@ -1,4 +1,4 @@
-:root {
+/* :global(:root) {
   --main-color                 : rgba(128, 30, 255, 1);
   --shadow-color               : rgba(178, 80, 255, 0.99);
   --transplant-color           : rgba(128, 30, 255, 0.1);
@@ -9,7 +9,7 @@
   --tooltip-arrow-border-bottom: 10px solid transparent;
   --tooltip-arrow-left         : 201px;
   --tooltip-arrow-top          : 33px;
-}
+} */
 
 .tooltip {
   position        : absolute;
