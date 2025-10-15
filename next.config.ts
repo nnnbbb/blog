@@ -70,6 +70,7 @@ const nextConfig: NextConfig = {
     // 在构建时忽略所有 ESLint 错误
     ignoreDuringBuilds: true,
   },
+  output: 'export',
 };
 
 export default nextConfig;

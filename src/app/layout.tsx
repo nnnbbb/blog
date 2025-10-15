@@ -15,14 +15,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="zh-CN">
       <head>
-        {/* <link
+        <link
           rel="stylesheet"
-          href="https://at.alicdn.com/t/c/font_4934641_ru2cdfa9zj.css"
-        /> */}
-        {/* <link
+          href="https://cdn.jsdelivr.net/npm/lxgw-wenkai-lite-webfont@1.1.0/style.css"
+          crossOrigin="anonymous"
+        />
+        <link
           rel="stylesheet"
-          href="https://kirigaya.cn/css/app.1c0cdd57.css"
-        /> */}
+          href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500;600;700&display=swap"
+        />
 
       </head>
       <body className="font-sans flex flex-col min-h-screen"
