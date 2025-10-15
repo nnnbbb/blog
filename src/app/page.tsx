@@ -46,32 +46,11 @@ export default function Home() {
   }, []);
 
   const getWeather = () => {
-    // @ts-ignore
-    window.ipJson = function (data: any) {
-
-      console.log(data)
-      Http.get("thirdparty/get-weather-by-city", {
-        city: data.city,
-        cityCode: data.cityCode,
-
-      }).then((res: any) => {
-        setWeather(res)
-      }).catch((err) => {
-        console.error("获取天气失败", err);
-      });
-    };
-
-    // 动态加载脚本
-    const script = document.createElement("script");
-    script.src = "//whois.pconline.com.cn/ipJson.jsp?callback=ipJson";
-    script.type = "text/javascript";
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-      // @ts-ignore
-      delete window.ipJson;
-    };
+    Http.get("thirdparty/get-weather-by-ip").then((res: any) => {
+      setWeather(res)
+    }).catch((err) => {
+      console.error("获取天气失败", err);
+    });
   }
 
   return (
