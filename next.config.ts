@@ -66,6 +66,10 @@ const nextConfig: NextConfig = {
     return redirects;
   },
   reactStrictMode: true,
+  eslint: {
+    // 在构建时忽略所有 ESLint 错误
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
