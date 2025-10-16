@@ -76,7 +76,7 @@ const nextConfig: NextConfig = withPWA({
     // 在构建时忽略所有 ESLint 错误
     ignoreDuringBuilds: true,
   },
-  output: 'export',
+  // output: 'export', // 导出静态文件
 });
 
 
