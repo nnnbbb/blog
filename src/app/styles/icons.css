@@ -10,7 +10,7 @@
 @font-face {
   font-family : "iconfont";
   /* Project id 3899231 */
-  src         : url("https://kirigaya.cn/fonts/iconfont.53f75585.woff2") format('woff2');
+  src: url("/fonts/iconfont.woff2") format('woff2');
   font-weight : normal;
   font-style  : normal;
   font-display: swap;

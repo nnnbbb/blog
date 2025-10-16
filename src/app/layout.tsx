@@ -8,6 +8,8 @@ import './globals.css';
 export const metadata: Metadata = {
   title: `神机阁 - 星河的个人博客`,
   description: `一个记录技术、生活和思考的个人博客空间`,
+  manifest: "/manifest.json",
+  themeColor: "#0070f3",
 };
 
 

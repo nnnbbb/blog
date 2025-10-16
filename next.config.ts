@@ -49,7 +49,13 @@ const securityHeaders = [
   },
 ];
 
-const nextConfig: NextConfig = {
+const withPWA = require('next-pwa')({
+  dest: 'public', // 生成的 service worker 文件存放在 public 目录
+  register: true,
+  skipWaiting: true,
+});
+
+const nextConfig: NextConfig = withPWA({
   poweredByHeader: false,
   experimental: {
     webpackMemoryOptimizations: true,
@@ -71,6 +77,8 @@ const nextConfig: NextConfig = {
     ignoreDuringBuilds: true,
   },
   output: 'export',
-};
+});
+
+
 
 export default nextConfig;
