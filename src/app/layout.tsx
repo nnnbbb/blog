@@ -4,6 +4,7 @@ import Footer from '@/components/Footer';
 import { Suspense } from 'react';
 
 import './globals.css';
+import Loading from '@/components/Loading';
 
 export const metadata: Metadata = {
   title: `神机阁 - 星河的个人博客`,
@@ -50,6 +51,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
           </Suspense>
         </div>
+        <Loading />
       </body>
     </html >
   );
