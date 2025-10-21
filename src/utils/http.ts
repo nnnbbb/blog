@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig, AxiosResponse } from "axios";
+import { toast } from "@/components/Toast";
 
 interface CreateHttpProps {
   baseURL?: string;
@@ -53,6 +54,7 @@ export const CreateHttp = (props: CreateHttpProps = {}): IAxiosInstance => {
     error => {
       let errMsg = "网络错误，请稍后重试";
       const status = error.response?.status;
+      let message = error.response?.data?.message;
       if (status === 401) {
         errMsg = "未授权或登录已过期";
         localStorage.removeItem("token");
@@ -63,7 +65,8 @@ export const CreateHttp = (props: CreateHttpProps = {}): IAxiosInstance => {
       } else if (status === 500) {
         errMsg = "服务器错误";
       }
-      if (errorHandling) onError?.(errMsg);
+      if (errorHandling) onError?.(message || errMsg);
+      toast(message || errMsg, 5000);
       // return Promise.reject(error);
     }
   );
