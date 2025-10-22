@@ -83,7 +83,7 @@ export default function Home() {
 
         {/* 侧边栏 */}
         <div className={"right"}>
-          <div className="c" style={{ position: 'relative', height: '100%' }}>
+          <div className="c" style={{ position: 'relative', height: '100%', minWidth: '380px' }}>
             <div className="scroll" style={{ position: 'sticky', top: '10px', display: 'block' }}>
               {/* 天气卡片 */}
               <WeatherCard
