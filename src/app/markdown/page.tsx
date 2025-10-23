@@ -12,6 +12,8 @@ export default function MarkdownEditorPage() {
   const [title, setTitle] = useState("");
   const [imgUrl, setImgUrl] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
+  const [isPrivate, setIsPrivate] = useState(false);
+
   const searchParams = useSearchParams();
   const seq = searchParams?.get("seq");
   const router = useRouter();
@@ -23,6 +25,7 @@ export default function MarkdownEditorPage() {
     setSelectedTags(res.tags)
     setTitle(res.title)
     setImgUrl(res.imgUrl)
+    setIsPrivate(res.isPrivate ?? false)
   }
 
   const publishArticle = async () => {
@@ -44,7 +47,8 @@ export default function MarkdownEditorPage() {
         title,
         content: markdown,
         tags: selectedTags,
-        imgUrl
+        imgUrl,
+        isPrivate: isPrivate,
       }
       let res
       if (seq === null) {
@@ -52,12 +56,13 @@ export default function MarkdownEditorPage() {
       } else {
         res = await Http.put(`/blog/${seq}`, { id: seq, ...body });
       }
-
-      setTitle("");
-      setImgUrl("");
-      setSelectedTags([]);
-      toast('文章发布成功！');
-      router.push(`/blog/article?seq=${res.id}`);
+      if (res) {
+        setTitle("");
+        setImgUrl("");
+        setSelectedTags([]);
+        toast('文章发布成功！');
+        router.push(`/blog/article?seq=${res.id}`);
+      }
 
     } catch (err) {
       console.error("发布失败", err);
@@ -83,6 +88,8 @@ export default function MarkdownEditorPage() {
         selectedTags={selectedTags}
         setSelectedTags={setSelectedTags}
         publishArticle={publishArticle}
+        isPrivate={isPrivate}
+        setIsPrivate={setIsPrivate}
       />
     </div>
   );

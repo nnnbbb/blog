@@ -15,6 +15,8 @@ interface PublishFormProps {
   setImgUrl: React.Dispatch<React.SetStateAction<string>>
   selectedTags: string[];
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>
+  isPrivate: boolean;
+  setIsPrivate: (value: boolean) => void;
   publishArticle: () => Promise<void>
 }
 
@@ -99,6 +101,8 @@ export default function PublishForm({
   setImgUrl,
   selectedTags,
   setSelectedTags,
+  isPrivate,
+  setIsPrivate,
   publishArticle,
 }: PublishFormProps) {
   const [recommendTags, setRecommendTags] = useState<string[]>([]);
@@ -286,13 +290,28 @@ export default function PublishForm({
       </div>
 
 
+      <div className='flex justify-start'>
+        <div className="k-switch-container m-6" >
+          <input
+            id="private-toggle"
+            type="checkbox"
+            checked={isPrivate}
+            onChange={(e) => setIsPrivate(e.target.checked)}
+          />
+          <label htmlFor="private-toggle">
+            <div className="switch-label">
+              私密发布
+            </div>
+          </label>
+        </div>
 
-      <div className={styles['publish-button']}>
-        <button
-          className={styles['publishBtn']}
-          onClick={publishArticle}>
-          <span className='iconfont icon-publish'> 发布到我的博客</span>
-        </button>
+        <div className={styles['publish-button']}>
+          <button
+            className={styles['publishBtn']}
+            onClick={publishArticle}>
+            <span className='iconfont icon-publish'> 发布到我的博客</span>
+          </button>
+        </div>
       </div>
     </div>
   );

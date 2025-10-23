@@ -15,7 +15,11 @@ export default function MarkdownEditor({ markdown, setMarkdown }: MarkdownEditor
   const previewRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | undefined>(undefined);
   const [showPreview, setShowPreview] = useState(false);
+  const [published, setPublished] = useState(false);
   const isMobile = useIsMobile();
+  const [activeButton, setActiveButton] = useState<'edit' | 'preview' | 'publish'>('edit');
+  const activeClass = 'bg-purple-600 text-white';
+  const inactiveClass = 'bg-gray-100 text-gray-800';
 
   const handleMarkdownChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     setMarkdown(e.target.value);
@@ -35,74 +39,91 @@ export default function MarkdownEditor({ markdown, setMarkdown }: MarkdownEditor
       {isMobile && (
         <div className="flex justify-center gap-4 p-3 border-b border-gray-200">
           <button
-            onClick={() => setShowPreview(false)}
-            className={!showPreview ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-800'}
+            onClick={() => {
+              setShowPreview(false)
+              setActiveButton('edit')
+            }}
+            className={activeButton === 'edit' ? activeClass : inactiveClass}
           >
             编辑
           </button>
           <button
-            onClick={() => setShowPreview(true)}
-            className={showPreview ? 'bg-purple-600 text-white' : 'bg-gray-100 text-gray-800'}
+            onClick={() => {
+              setShowPreview(true)
+              setActiveButton('preview')
+            }}
+            className={activeButton === 'preview' ? activeClass : inactiveClass}
           >
             预览
+          </button>
+          <button
+            onClick={() => {
+              setPublished(!published)
+              setActiveButton('publish')
+            }}
+            className={activeButton === 'publish' ? activeClass : inactiveClass}
+          >
+            发布
           </button>
         </div>
       )}
 
       {/* 内容区域 */}
-      <div
-        className={clsx(
-          isMobile ? 'flex-col' : 'flex-row justify-between',
-          'flex',
-          'w-full',
-          'flex-grow',
-        )}
-      >
-        {/* 编辑器 */}
-        {(!isMobile || !showPreview) && (
-          <div
-            className={isMobile ? 'w-full' : 'w-1/2'}
-          >
-            <textarea
-              value={markdown}
-              onChange={handleMarkdownChange}
-              placeholder="在这里输入 Markdown 文本..."
-              style={{
-                width: '100%',
-                height: height ? `${height}px` : 'auto',
-                resize: 'both',
-              }}
-              className={styles['my-textarea']}
-            />
-          </div>
-        )}
-
-        {/* 预览 */}
-        {(!isMobile || showPreview) && (
-          <div
-            ref={previewRef}
-            className={`${isMobile ? 'w-full' : 'w-1/2'} p-6 overflow-auto markdown`}
-            style={{
-              scrollbarWidth: 'thin',
-              scrollbarColor: 'rgba(128, 30, 255, 0.3) white',
-            }}
-          >
-            <div className="w-full">
-              {markdown.trim() ? (
-                <LMarkdown markdown={markdown} />
-              ) : (
-                <div className="flex flex-col items-center justify-center h-full">
-                  <span
-                    className={`iconfont icon-empty`}
-                    style={{ fontSize: '200px', color: 'rgb(128, 30, 255)' }}
-                  ></span>
-                  <div className="mt-4">你貌似没有写什么</div>
-                </div>
-              )}
+      {!published &&
+        <div
+          className={clsx(
+            isMobile ? 'flex-col' : 'flex-row justify-between',
+            'flex',
+            'w-full',
+            'flex-grow',
+          )}
+        >
+          {/* 编辑器 */}
+          {(!isMobile || !showPreview) && (
+            <div
+              className={isMobile ? 'w-full' : 'w-1/2'}
+            >
+              <textarea
+                value={markdown}
+                onChange={handleMarkdownChange}
+                placeholder="在这里输入 Markdown 文本..."
+                style={{
+                  width: '100%',
+                  height: height ? `${height}px` : 'auto',
+                  resize: 'both',
+                }}
+                className={styles['my-textarea']}
+              />
             </div>
-          </div>
-        )}
-      </div>
+          )}
+
+          {/* 预览 */}
+          {(!isMobile || showPreview) && (
+            <div
+              ref={previewRef}
+              className={`${isMobile ? 'w-full' : 'w-1/2'} p-6 overflow-auto markdown`}
+              style={{
+                scrollbarWidth: 'thin',
+                scrollbarColor: 'rgba(128, 30, 255, 0.3) white',
+              }}
+            >
+              <div className="w-full">
+                {markdown.trim() ? (
+                  <LMarkdown markdown={markdown} />
+                ) : (
+                  <div className="flex flex-col items-center justify-center h-full">
+                    <span
+                      className={`iconfont icon-empty`}
+                      style={{ fontSize: '200px', color: 'rgb(128, 30, 255)' }}
+                    ></span>
+                    <div className="mt-4">你貌似没有写什么</div>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
+        </div>
+      }
     </div>
   );
 }
