@@ -7,18 +7,40 @@ import Pagination from '../../components/Pagination';
 import { Http } from '@/utils/http';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BlogItem } from '../../types/blog-item.interface';
+import { usePathname, useRouter, useSearchParams } from 'next/navigation';
 
 
 export default function Blog() {
   const [blogs, setBlogs] = useState<BlogItem[]>([]);
   const [total, setTotal] = useState(0);
-  const [page, setPage] = useState(1);
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const initialPage = Math.max(1, Number(searchParams.get('page') ?? '1') || 1);
+  const [page, setPage] = useState(initialPage);
   const pageSize = 9;
+
+  const writePageToUrl = (nextPage: number) => {
+    const params = new URLSearchParams(Array.from(searchParams.entries()));
+    if (nextPage === 1) {
+      params.delete('page');
+    } else {
+      params.set('page', String(nextPage));
+    }
+    router.push(`${pathname}${params.size ? `?${params.toString()}` : ''}`, { scroll: false });
+  };
   const top = () => {
     // 默认滚动到 window 顶部
     const sc = document.scrollingElement || document.documentElement || document.body;
     sc.scrollTo({ top: 0, behavior: "smooth" });
   }
+  // 同步 url 页码与 state 页码
+  useEffect(() => {
+    const sp = searchParams.get('page');
+    const nextPage = Math.max(1, Number(sp ?? '1') || 1);
+    if (nextPage !== page) setPage(nextPage);
+  }, [searchParams]);
+
   useEffect(() => {
     Http.get<{ list: BlogItem[], total: number }>(
       `/blog/query-blog`, {
@@ -112,6 +134,7 @@ export default function Blog() {
                 onChange={(p) => {
                   top()
                   setPage(p)
+                  writePageToUrl(p)
                 }}
               />
             </div>
