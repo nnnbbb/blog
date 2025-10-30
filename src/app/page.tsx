@@ -8,6 +8,7 @@ import "./page.css";
 import { Http } from "../utils/http";
 import { AnimatePresence, motion } from "framer-motion";
 import TopBlog from "../components/TopBlog";
+import { useScrollRestoration } from "@/hooks/useScrollRestoration";
 
 interface Article {
   id: number;
@@ -27,10 +28,12 @@ interface Weather {
   weather: string;
   wind: string;
 }
+const SCROLL_KEY = "HOME_PAGE_SCROLL_STORAGE_KEY";
+
 export default function Home() {
   const [articles, setArticles] = useState<Article[]>([]);
   const [weather, setWeather] = useState<Weather>();
-
+  useScrollRestoration(SCROLL_KEY, ".c");
   useEffect(() => {
     Http.get("/home/get-news")
       .then((res: any) => {

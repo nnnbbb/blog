@@ -8,7 +8,9 @@ import { Http } from '@/utils/http';
 import { AnimatePresence, motion } from 'framer-motion';
 import { BlogItem } from '../../types/blog-item.interface';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { useScrollRestoration } from '@/hooks/useScrollRestoration';
 
+const SCROLL_KEY = "BLOG_PAGE_SCROLL_STORAGE_KEY";
 
 export default function Blog() {
   const [blogs, setBlogs] = useState<BlogItem[]>([]);
@@ -19,7 +21,9 @@ export default function Blog() {
   const initialPage = Math.max(1, Number(searchParams.get('page') ?? '1') || 1);
   const [page, setPage] = useState(initialPage);
   const pageSize = 9;
+  useScrollRestoration(SCROLL_KEY, ".row");
 
+  // 写入 URL 页码
   const writePageToUrl = (nextPage: number) => {
     const params = new URLSearchParams(Array.from(searchParams.entries()));
     if (nextPage === 1) {
@@ -33,8 +37,9 @@ export default function Blog() {
     // 默认滚动到 window 顶部
     const sc = document.scrollingElement || document.documentElement || document.body;
     sc.scrollTo({ top: 0, behavior: "smooth" });
-  }
-  // 同步 url 页码与 state 页码
+  };
+
+  // 同步 URL 页码和 state 页码
   useEffect(() => {
     const sp = searchParams.get('page');
     const nextPage = Math.max(1, Number(sp ?? '1') || 1);
