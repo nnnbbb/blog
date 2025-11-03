@@ -27,6 +27,7 @@ export default function MarkdownEditorPage() {
     setTitle(res.title)
     setImgUrl(res.imgUrl)
     setIsPrivate(res.isPrivate ?? false)
+    setIsPrivate(res.isPinned ?? false)
   }
 
   const publishArticle = async () => {
