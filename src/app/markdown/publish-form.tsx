@@ -17,6 +17,8 @@ interface PublishFormProps {
   setSelectedTags: React.Dispatch<React.SetStateAction<string[]>>
   isPrivate: boolean;
   setIsPrivate: (value: boolean) => void;
+  isPinned: boolean;
+  setIsPinned: (value: boolean) => void;
   publishArticle: () => Promise<void>
 }
 
@@ -103,6 +105,8 @@ export default function PublishForm({
   setSelectedTags,
   isPrivate,
   setIsPrivate,
+  isPinned,
+  setIsPinned,
   publishArticle,
 }: PublishFormProps) {
   const [recommendTags, setRecommendTags] = useState<string[]>([]);
@@ -301,6 +305,17 @@ export default function PublishForm({
           <label htmlFor="private-toggle">
             <div className="switch-label">
               私密发布
+            </div>
+          </label>
+          <input
+            id="pinned-toggle"
+            type="checkbox"
+            checked={isPinned}
+            onChange={(e) => setIsPinned(e.target.checked)}
+          />
+          <label htmlFor="pinned-toggle">
+            <div className="switch-label">
+              置顶
             </div>
           </label>
         </div>

@@ -13,6 +13,7 @@ export default function MarkdownEditorPage() {
   const [imgUrl, setImgUrl] = useState("");
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
   const [isPrivate, setIsPrivate] = useState(false);
+  const [isPinned, setIsPinned] = useState(false);
 
   const searchParams = useSearchParams();
   const seq = searchParams?.get("seq");
@@ -90,6 +91,8 @@ export default function MarkdownEditorPage() {
         publishArticle={publishArticle}
         isPrivate={isPrivate}
         setIsPrivate={setIsPrivate}
+        isPinned={isPinned}
+        setIsPinned={setIsPinned}
       />
     </div>
   );
